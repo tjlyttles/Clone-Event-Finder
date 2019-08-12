@@ -25,13 +25,13 @@ const EventCardPreview = props => {
             </Card.Body>
             <Card.Footer style={{ background: "#343a40", color: "white" }}>
                 {/* <Link onClick={() => props.setCurrent(props.event)} to="/view" className="card-link">View</Link> */}
-                <Link to="/view" className="card-link">View</Link>
+                <Link to={`/view/${props.event._id}`} className="card-link">View</Link>
                 {
                     props.user._id === props.event.user &&
                     <Fragment>
                         {/* <Link className="card-link" to="/create" onClick={() => setCurrent(event)}>Edit</Link>
                         <Button className="btn-danger" size="sm" onClick={() => setShowAlert(true)} style={{ float: "right" }}>Delete</Button> */}
-                        <DeleteButton />
+                        <DeleteButton eventId={props.event._id} />
                     </Fragment>
                 }
 

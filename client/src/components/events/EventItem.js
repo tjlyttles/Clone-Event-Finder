@@ -76,7 +76,7 @@ const EventItem = ({ event }) => {
                 </Card.Subtitle>
             </Card.Body>
             <Card.Footer style={{ background: "#343a40", color: "white" }}>
-                <Link onClick={() => setCurrent(event)} to="/view" className="card-link">View</Link>
+                <Link to={`/view/${event._id}`} className="card-link">View</Link>
                 {
                     user._id === event.user &&
                     <Fragment>

@@ -81,12 +81,12 @@ const CreateEvent = props => {
       // console.log("missing user")
     }
   });
-useEffect (() => {
-  if(urlId) {
-  getCurrent(urlId)
-}
-
-}, [getCurrent, urlId])
+  useEffect(() => {
+    if (urlId) {
+      getCurrent(urlId);
+    }
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     setTimeMessage(null);

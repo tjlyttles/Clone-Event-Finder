@@ -9,6 +9,7 @@ import history from "./utils/history";
 import Navigation from "./components/Navigation"
 import Home from "./pages/Home";
 import User from "./pages/User";
+import EditEvent from "./pages/EditEvent"
 import CreateEvent from "./pages/CreateEvent";
 import SearchEvent from "./pages/SearchEvent";
 import ViewEvent from "./components/events/ViewEvent";
@@ -31,7 +32,8 @@ function App() {
                                 <PrivateRoute exact path="/user" component={User} />
                                 <PrivateRoute exact path="/create" component={CreateEvent} />
                                 <Route exact path="/search" component={SearchEvent} />
-                                <PrivateRoute exact path="/view" component={ViewEvent} />
+                                <PrivateRoute exact path="/view/:id" component={ViewEvent} />
+                                <PrivateRoute exact path="/edit/:id" component={EditEvent} />
                                 {/* <PrivateRoute exact path="/review" component={UserReview} /> */}
                                 <Route render={() => <h1>404 Page not found.</h1>} />
                             </Switch>

@@ -7,7 +7,7 @@ import {
   CLEAR_USERS,
   UNJOIN_EVENT,
   DELETE_EVENT,
-  SET_CURRENT,
+  GET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_EVENT,
   FILTER_EVENTS,
@@ -22,7 +22,15 @@ export default (state, action) => {
     case GET_USER_EVENTS:
       return {
         ...state,
+        current: null,
         events: action.payload,
+        loading: false
+      };
+    case UPDATE_EVENT:
+    case GET_CURRENT:
+      return {
+        ...state,
+        current: action.payload,
         loading: false
       };
     case GET_USERS:
@@ -44,7 +52,6 @@ export default (state, action) => {
       };
     case UNJOIN_EVENT:
     case JOIN_EVENT:
-    case UPDATE_EVENT:
       return {
         ...state,
         events: state.events.map(event =>
@@ -65,12 +72,6 @@ export default (state, action) => {
         filtered: null,
         error: null,
         current: null
-      };
-    case SET_CURRENT:
-      localStorage.setItem("cacheEvent", JSON.stringify(action.payload));
-      return {
-        ...state,
-        current: action.payload
       };
     case CLEAR_CURRENT:
       localStorage.removeItem("cacheEvent");
