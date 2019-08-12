@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/auth/authContext";
 import EventContext from "../context/event/eventContext";
 import Loading from "../components/Loading";
-
-import EventList from "../components/events/EventList";
+import UserEvents from "../components/events/UserEvents";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -36,8 +35,6 @@ const User = props => {
     });
 
     useEffect(() => {
-        clearUsers();
-        clearCurrent();
         getUserEvents();
         // eslint-disable-next-line
     }, []);
@@ -120,12 +117,16 @@ const User = props => {
                     </Card>
                 </Col>
                 <Col md={6}>
-                    <Card>
-                        <Card.Body>
-                            {events ? <EventList events={events} /> : <Card.Text>No events available.</Card.Text>}
-                        </Card.Body>
-                    </Card>
-                </Col>
+          <Card>
+            <Card.Body>
+              {!events ? (
+                <Card.Text>No events available.</Card.Text>
+              ) : (
+                <UserEvents key={events._id} events={events} user={user} />
+              )}
+            </Card.Body>
+          </Card>
+        </Col>
             </Row>
 
             {showProfile && (

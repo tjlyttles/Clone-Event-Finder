@@ -6,6 +6,7 @@ import JoinButton from "../buttons/JoinButton";
 import LeaveButton from "../buttons/LeaveButton";
 import DeleteButton from "../buttons/DeleteButton";
 
+// child of EventList
 const EventCardPreview = props => {
     return (
         <Card>

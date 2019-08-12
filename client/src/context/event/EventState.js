@@ -96,7 +96,7 @@ const EventState = props => {
   };
 
   //Join Event
-  const joinEvent = async event => {
+  const joinEvent = async eventId => {
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -105,8 +105,7 @@ const EventState = props => {
 
     try {
       const res = await axios.put(
-        `/api/events/join/${event._id}`,
-        event,
+        `/api/events/join/${eventId}`,
         config
       );
 
@@ -123,7 +122,7 @@ const EventState = props => {
   };
 
   //Leave Event
-  const unjoinEvent = async event => {
+  const unjoinEvent = async eventId => {
     const config = {
       headers: {
         "Content-Type": "application/json"
@@ -132,8 +131,7 @@ const EventState = props => {
 
     try {
       const res = await axios.put(
-        `/api/events/leave/${event._id}`,
-        event,
+        `/api/events/leave/${eventId}`,
         config
       );
 

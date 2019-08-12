@@ -26,6 +26,7 @@ export default (state, action) => {
         events: action.payload,
         loading: false
       };
+
     case UPDATE_EVENT:
     case GET_CURRENT:
       return {
@@ -52,13 +53,24 @@ export default (state, action) => {
       };
     case UNJOIN_EVENT:
     case JOIN_EVENT:
-      return {
-        ...state,
-        events: state.events.map(event =>
-          event._id === action.payload._id ? action.payload : event
-        ),
-        loading: false
-      };
+      if (state.current) {
+        return {
+          ...state,
+
+          current:
+            state.current._id === action.payload._id
+              ? action.payload
+              : state.current,
+          loading: false
+        };
+      } else {
+        return {
+          ...state,
+          events: state.events.map(event =>
+            event._id === action.payload._id ? action.payload : event
+          )
+        };
+      }
     case DELETE_EVENT:
       return {
         ...state,

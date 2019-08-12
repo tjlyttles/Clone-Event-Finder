@@ -6,6 +6,8 @@ import EventCardPreview from "./EventCardPreview";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
+
+//Not being used
 const EventList = () => {
     const eventContext = useContext(EventContext);
     const authContext = useContext(AuthContext);

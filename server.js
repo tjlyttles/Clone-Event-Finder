@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const path = require('path')
+const path = require("path");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
 //mongoose connection, need to add database name
 mongoose.connect(
   process.env.MONGODB_URI ||
-    "mongodb://user:password1@ds255347.mlab.com:55347/heroku_ms7qng4b",
+    "mongodb://user:password1@ds343127.mlab.com:43127/heroku_r3v7v5wc",
 
   { useCreateIndex: true, useFindAndModify: false, useNewUrlParser: true }
 );

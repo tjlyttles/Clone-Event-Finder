@@ -6,6 +6,8 @@ import Alert from "react-bootstrap/Alert";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
+
+//Child of EventList, SearchEvent
 const EventItem = ({ event }) => {
     const eventContext = useContext(EventContext);
     const authContext = useContext(AuthContext);
