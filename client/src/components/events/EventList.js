@@ -12,9 +12,9 @@ const EventList = () => {
     const eventContext = useContext(EventContext);
     const authContext = useContext(AuthContext);
     const { user } = authContext;
-    const { events, getUserEvents } = eventContext;
+    const { events, getUserEvents, upcomingEvents } = eventContext;
 
-    let upcomingEvents;
+    console.log(upcomingEvents);
     let pastEvents;
 
     useEffect(() => {
@@ -28,10 +28,11 @@ const EventList = () => {
                 <br /> <h4>Welcome! Try adding an event</h4>
             </div>
         );
-    } else {
-        upcomingEvents = events.filter(event => new Date(event.end) > new Date());
-        pastEvents = events.filter(event => new Date(event.end) < new Date());
     }
+    //  else {
+    //     upcomingEvents = events.filter(event => new Date(event.end) > new Date());
+    //     pastEvents = events.filter(event => new Date(event.end) < new Date());
+    // }
 
 
     return (

@@ -7,6 +7,7 @@ export const LOGIN_FAIL = "LOGIN_FAIL";
 export const LOGOUT = "LOGOUT";
 export const CLEAR_ERRORS = "CLEAR_ERRORS";
 export const GET_EVENTS = "GET_EVENTS";
+export const SORT_EVENTS = "SORT_EVENTS";
 export const VIEW_USER = "VIEW_USER";
 export const GET_USERS = "GET_USERS";
 export const CLEAR_USERS = "CLEAR_USERS";

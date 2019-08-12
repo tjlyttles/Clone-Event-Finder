@@ -8,14 +8,12 @@ import Tab from "react-bootstrap/Tab";
 
 //Child of User
 const UserEvents = props => {
-    const events = props.events
     const user = props.user
+    const upcomingEvents = props.upcomingEvents
+    const pastEvents = props.pastEvents
 
-    const eventContext = useContext(EventContext);
-    const { setCurrent } = eventContext;
-    console.log(events)
-    let upcomingEvents = events.filter(event => new Date(event.end) > new Date());
-    let pastEvents = events.filter(event => new Date(event.end) < new Date());
+  
+    
 
     const [showAddress] = useState("hide");
     const [showViewLink] = useState("show");
@@ -25,14 +23,14 @@ const UserEvents = props => {
         <Tabs defaultActiveKey="home" id="uncontrolled-tab-example">
             <Tab eventKey="home" title="Upcoming Events">
                 <br />
-                {
-                    upcomingEvents.map(event => <EventCard key={event._id} user={user} event={event} setCurrent={setCurrent} showAddress={showAddress} showViewLink={showViewLink} />)
+                {upcomingEvents &&
+                    upcomingEvents.map(event => <EventCard key={event._id} user={user} event={event}  showAddress={showAddress} showViewLink={showViewLink} />)
                 }
             </Tab>
             <Tab eventKey="profile" title="Past Events">
                 <br />
-                {
-                    pastEvents.map(event => <EventCard key={event._id} user={user} event={event} setCurrent={setCurrent} showAddress={showAddress} showViewLink={showViewLink} />)
+                {pastEvents &&
+                    pastEvents.map(event => <EventCard key={event._id} user={user} event={event} showAddress={showAddress} showViewLink={showViewLink} />)
                 }
             </Tab>
         </Tabs>

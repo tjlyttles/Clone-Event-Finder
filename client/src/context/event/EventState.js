@@ -5,6 +5,7 @@ import eventReducer from "./eventReducer";
 import {
   GET_USER_EVENTS,
   GET_EVENTS,
+  SORT_EVENTS,
   ADD_EVENT,
   JOIN_EVENT,
   GET_USERS,
@@ -24,6 +25,8 @@ const EventState = props => {
   const initialState = {
     events: null,
     current: null,
+    pastEvents: null,
+    upcomingEvents: null,
     filtered: null,
     setUsers: null,
     error: null
@@ -40,6 +43,7 @@ const EventState = props => {
         type: GET_EVENTS,
         payload: res.data
       });
+      sortEvents();
     } catch (err) {
       dispatch({
         type: EVENT_ERROR,
@@ -57,12 +61,18 @@ const EventState = props => {
         type: GET_USER_EVENTS,
         payload: res.data
       });
+      sortEvents();
     } catch (err) {
       dispatch({
         type: EVENT_ERROR,
         payload: err.response.msg
       });
     }
+  };
+
+  //Get User Events
+  const sortEvents = async () => {
+    dispatch({ type: SORT_EVENTS });
   };
 
   // Clear Profiles
@@ -104,10 +114,7 @@ const EventState = props => {
     };
 
     try {
-      const res = await axios.put(
-        `/api/events/join/${eventId}`,
-        config
-      );
+      const res = await axios.put(`/api/events/join/${eventId}`, config);
 
       dispatch({
         type: JOIN_EVENT,
@@ -130,10 +137,7 @@ const EventState = props => {
     };
 
     try {
-      const res = await axios.put(
-        `/api/events/leave/${eventId}`,
-        config
-      );
+      const res = await axios.put(`/api/events/leave/${eventId}`, config);
 
       dispatch({
         type: UNJOIN_EVENT,
@@ -221,10 +225,8 @@ const EventState = props => {
   // Set Current Event
   const getCurrent = async eventId => {
     try {
-      
       const res = await axios.get(`/api/events/event/${eventId}`);
-      
-     
+
       dispatch({
         type: GET_CURRENT,
         payload: res.data
@@ -248,6 +250,9 @@ const EventState = props => {
         events: state.events,
         setUsers: state.setUsers,
         current: state.current,
+        joinedEvents: state.joinEvents,
+        pastEvents: state.pastEvents,
+        upcomingEvents: state.upcomingEvents,
         cacheEvent: state.cacheEvent,
         filtered: state.filtered,
         error: state.error,

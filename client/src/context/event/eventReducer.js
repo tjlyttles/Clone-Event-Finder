@@ -2,6 +2,7 @@ import {
   GET_USER_EVENTS,
   GET_EVENTS,
   ADD_EVENT,
+  SORT_EVENTS,
   JOIN_EVENT,
   GET_USERS,
   CLEAR_USERS,
@@ -23,10 +24,19 @@ export default (state, action) => {
       return {
         ...state,
         current: null,
-        events: action.payload,
+        events: action.payload
+      };
+    case SORT_EVENTS:
+      return {
+        ...state,
+        upcomingEvents: state.events.filter(
+          event => new Date(event.end) > new Date()
+        ),
+        pastEvents: state.events.filter(
+          event => new Date(event.end) < new Date()
+        ),
         loading: false
       };
-
     case UPDATE_EVENT:
     case GET_CURRENT:
       return {

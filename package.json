@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thejihongjin/22-Project-3.git"
+    "url": "git+https://github.com/tjlyttles/Event-Finder.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thejihongjin/22-Project-3/issues"
+    "url": "https://github.com/tjlyttles/Event-Finder/issues"
   },
-  "homepage": "https://github.com/thejihongjin/22-Project-3#readme",
+  "homepage": "https://github.com/tjlyttles/Event-Finder#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.2",

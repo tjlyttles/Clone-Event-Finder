@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import EventContext from "../../context/event/eventContext";
 //import EventAPI from "../../utils/EventAPI";
@@ -12,6 +12,7 @@ const JoinButton = props => {
   console.log(event)
   const eventContext = useContext(EventContext);
   const { joinEvent } = eventContext;
+
 
   const handleJoin = (eventInfo, setShowToast) => {
     console.log(eventInfo);

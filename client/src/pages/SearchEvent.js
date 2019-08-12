@@ -31,6 +31,7 @@ const SearchEvent = () => {
     clearCurrent,
     filterEvents,
     clearFilter,
+    upcomingEvents,
     events,
     filtered
   } = eventContext;
@@ -144,14 +145,14 @@ return (
       <Card.Body>
         <Card.Title>Results</Card.Title>
         <CardColumns>
-          {events === null ? (
+          {upcomingEvents === null ? (
             <div>No Events Available</div>
           ) : filtered !== null ? (
             filtered.map(event => (
               <EventCard key={event._id} event={event} user={user} showAddress={showAddress} showViewLink={showViewLink} setShowToast={setShowToast} />
             ))
           ) : (
-            events.map(event => (
+            upcomingEvents.map(event => (
               <EventCard key={event._id} event={event} user={user} showAddress={showAddress} showViewLink={showViewLink} setShowToast={setShowToast} />
             ))
           )}

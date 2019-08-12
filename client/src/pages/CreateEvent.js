@@ -113,20 +113,7 @@ useEffect (() => {
     setEvent(saveState);
     //setEvent({...event, [start]: date})
   };
-  useEffect(() => {
-    if (current) {
-      setEvent(current);
-      setStartTime(current.start);
-      setEndTime(current.end);
-    } else {
-      // setEvent({
-      //   category: "Movie",
-      //   groupSize: "",
-      //   addressInfo: ""
-      // });
-      console.log("No event yet");
-    }
-  }, [eventContext, current]);
+
 
   const {
     name,
