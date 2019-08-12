@@ -25,7 +25,7 @@ const User = props => {
     const authContext = useContext(AuthContext);
     const { user, updateUser } = authContext;
     const eventContext = useContext(EventContext);
-    const {  events, getUserEvents, pastEvents, upcomingEvents } = eventContext;
+    const {  events, getUserEvents, pastEvents, upcomingEvents, userEvents } = eventContext;
 
     useEffect(() => {
         if (!user) {
@@ -119,10 +119,10 @@ const User = props => {
                 <Col md={6}>
           <Card>
             <Card.Body>
-              {!events ? (
+              {!userEvents ? (
                 <Card.Text>No events available.</Card.Text>
               ) : (
-                <UserEvents key={events._id} upcomingEvents={upcomingEvents} pastEvents={pastEvents} user={user} />
+                <UserEvents key={userEvents._id} upcomingEvents={upcomingEvents} pastEvents={pastEvents} user={user} />
               )}
             </Card.Body>
           </Card>

@@ -24,6 +24,7 @@ import {
 const EventState = props => {
   const initialState = {
     events: null,
+    userEvents: null,
     current: null,
     pastEvents: null,
     upcomingEvents: null,
@@ -248,6 +249,7 @@ const EventState = props => {
     <EventContext.Provider
       value={{
         events: state.events,
+        userEvents: state.userEvents,
         setUsers: state.setUsers,
         current: state.current,
         joinedEvents: state.joinEvents,

@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tjlyttles/Event-Finder.git"
+    "url": "git+https://github.com/tjlyttles/Clone-Event-Finder.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tjlyttles/Event-Finder/issues"
+    "url": "https://github.com/tjlyttles/Clone-Event-Finder/issues"
   },
-  "homepage": "https://github.com/tjlyttles/Event-Finder#readme",
+  "homepage": "https://github.com/tjlyttles/Clone-Event-Finder#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "config": "^3.2.2",

@@ -20,13 +20,41 @@ import {
 export default (state, action) => {
   switch (action.type) {
     case GET_EVENTS:
+      return {
+        ...state,
+        current: null,
+        userEvents: null,
+        events: action.payload
+      };
     case GET_USER_EVENTS:
       return {
         ...state,
         current: null,
-        events: action.payload
+        events: null,
+        userEvents: action.payload
       };
     case SORT_EVENTS:
+      if(state.events) {return {
+        ...state,
+        upcomingEvents: state.events.filter(
+          event => new Date(event.end) > new Date()
+        ),
+        pastEvents: state.events.filter(
+          event => new Date(event.end) < new Date()
+        ),
+        loading: false
+      } }else if (state.userEvents) {
+        return {
+          ...state,
+          upcomingEvents: state.userEvents.filter(
+            event => new Date(event.end) > new Date()
+          ),
+          pastEvents: state.userEvents.filter(
+            event => new Date(event.end) < new Date()
+          ),
+          loading: false
+        } 
+      }
       return {
         ...state,
         upcomingEvents: state.events.filter(
@@ -58,7 +86,7 @@ export default (state, action) => {
     case ADD_EVENT:
       return {
         ...state,
-        events: [action.payload, ...state.events],
+        userEvents: [action.payload, ...state.userEvents],
         loading: false
       };
     case UNJOIN_EVENT:
