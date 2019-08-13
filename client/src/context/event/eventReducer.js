@@ -84,12 +84,7 @@ export default (state, action) => {
         ...state,
         setUsers: null
       };
-    case ADD_EVENT:
-      return {
-        ...state,
-        userEvents: [action.payload, ...state.userEvents],
-        loading: false
-      };
+   
     case UNJOIN_EVENT:
     case JOIN_EVENT:
       if (state.current) {

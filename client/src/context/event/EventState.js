@@ -94,10 +94,7 @@ const EventState = props => {
       console.log(event);
       const res = await axios.post("/api/events", event, config);
 
-      dispatch({
-        type: ADD_EVENT,
-        payload: res.data
-      });
+    
     } catch (err) {
       console.log(err);
       dispatch({

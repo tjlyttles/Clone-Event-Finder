@@ -210,7 +210,7 @@ router.put("/leave/:id", auth, async (req, res) => {
       { new: true }
     );
     const response = await User.findByIdAndUpdate(req.user.id, {
-      $pull: { attendingId: event._id }
+      $pull: { attendId: event._id }
     });
     if (response.isModified) {
       res.json(event);

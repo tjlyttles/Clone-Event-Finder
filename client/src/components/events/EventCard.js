@@ -13,6 +13,8 @@ import EventContext from "../../context/event/eventContext";
 const EventCard = props => {
     const user = props.user;
     const event = props.event;
+    const joinEvent = props.joinEvent
+    const unjoinEvent = props.unjoinEvent
     const showAddress = props.showAddress;
     const showViewLink = props.showViewLink;
     let eventAddress;
@@ -25,6 +27,7 @@ const EventCard = props => {
   } = eventContext;
 
     const [showAlert, setShowAlert] = useState(false);
+    
 
     const handleDelete = eventId => {
         console.log("eventId", eventId);
@@ -96,8 +99,8 @@ const EventCard = props => {
                                     </Fragment>
                                 )}
 
-                            {user._id !== event.user && !event.attendingId.includes(user._id) && <JoinButton user={user} event={event} setShowToast={props.setShowToast} />}
-                                {event.user !== user._id && event.attendingId.includes(user._id) && <LeaveButton user={user} event={event} />}
+                            {user._id !== event.user && !user.attendId.includes(event._id) && <JoinButton user={user} event={event} joinEvent={joinEvent} setShowToast={props.setShowToast} />}
+                                {event.user !== user._id && user.attendId.includes(event._id) && <LeaveButton user={user} event={event} unjoinEvent={unjoinEvent} />}
                             </Card.Footer>
                         </Fragment>
                     }

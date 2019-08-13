@@ -35,17 +35,19 @@ const SearchEvent = () => {
     events,
     filtered,
     needReRender,
+    joinEvent,
+    unjoinEvent,
     callReRender
   } = eventContext;
   //console.log(events);
 
   useEffect(() => {
-    if (needReRender !== false) {
+    
       //console.log(needReRender)
       getEvents();
-      callReRender(false)
+      
       //console.log(needReRender)
-    }
+  
     // eslint-disable-next-line
   }, [needReRender]);
 
@@ -155,7 +157,7 @@ return (
             <div>No Events Available</div>
           ) : filtered !== null ? (
             filtered.map(event => (
-              <EventCard key={event._id} event={event} user={user} showAddress={showAddress} showViewLink={showViewLink} setShowToast={setShowToast} />
+              <EventCard key={event._id} joinEvent={joinEvent} unjoinEvent={unjoinEvent} event={event} user={user} showAddress={showAddress} showViewLink={showViewLink} setShowToast={setShowToast} />
             ))
           ) : (
             upcomingEvents.map(event => (

@@ -12,7 +12,7 @@ const JoinButton = props => {
   const event = props.event;
   //console.log(event)
   const eventContext = useContext(EventContext);
-  const { joinEvent, callReRender,needReRender } = eventContext;
+  const { joinEvent } = eventContext;
 
 
   const handleJoin = (eventInfo, setShowToast) => {
@@ -24,8 +24,8 @@ const JoinButton = props => {
       alert("Sorry, this event is full. 😟");
     } else {
       joinEvent(eventInfo._id).then(() => setShowToast(true));
-      callReRender(true);
-      console.log(needReRender)
+     
+    
       //       setEvent(urlId);
       //       getUsersProfile(urlId);
     }
