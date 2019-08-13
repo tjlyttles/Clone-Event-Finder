@@ -40,11 +40,9 @@ export default (state, action) => {
         upcomingEvents: state.events.filter(
           event => new Date(event.end) > new Date()
         ),
-        pastEvents: state.events.filter(
-          event => new Date(event.end) < new Date()
-        ),
         loading: false
-      } }else if (state.userEvents) {
+      } 
+      }else if (state.userEvents) {
         return {
           ...state,
           upcomingEvents: state.userEvents.filter(
@@ -97,7 +95,7 @@ export default (state, action) => {
               : state.current,
           loading: false
         };
-      } else {
+      } else if (state.event) {
         return {
           ...state,
           events: state.events.map(event =>
@@ -105,12 +103,14 @@ export default (state, action) => {
           )
         };
       }
-    case DELETE_EVENT:
-      return {
-        ...state,
-        events: state.events.filter(event => event._id !== action.payload),
-        loading: false
-      };
+    // case DELETE_EVENT:
+    //   if(state.userEvents) {
+    //   else if (state.event) {return {
+    //     ...state,
+    //     events: state.events.filter(event => event._id !== action.payload),
+    //     loading: false
+    //   }}
+
     case CLEAR_EVENTS:
       return {
         ...state,

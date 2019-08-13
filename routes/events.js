@@ -185,7 +185,7 @@ router.put("/join/:id", auth, async (req, res) => {
       { new: true }
     );
     const response = await User.findByIdAndUpdate(req.user.id, {
-      $push: { attendingId: event._id }
+      $push: { attendId: event._id }
     });
     if (response.isModified) {
       res.json(event);

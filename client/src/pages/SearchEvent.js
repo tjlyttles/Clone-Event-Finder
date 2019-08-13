@@ -49,7 +49,7 @@ const SearchEvent = () => {
       //console.log(needReRender)
   
     // eslint-disable-next-line
-  }, [needReRender]);
+  }, []);
 
   const handleChange = e => {
     if (text.current.value !== "") {
@@ -157,7 +157,7 @@ return (
             <div>No Events Available</div>
           ) : filtered !== null ? (
             filtered.map(event => (
-              <EventCard key={event._id} joinEvent={joinEvent} unjoinEvent={unjoinEvent} event={event} user={user} showAddress={showAddress} showViewLink={showViewLink} setShowToast={setShowToast} />
+              <EventCard key={event._id} event={event} user={user} showAddress={showAddress} showViewLink={showViewLink} setShowToast={setShowToast} />
             ))
           ) : (
             upcomingEvents.map(event => (

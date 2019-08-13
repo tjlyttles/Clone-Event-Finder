@@ -8,7 +8,7 @@ const LeaveButton = props => {
   const { unjoinEvent } = eventContext;
 
   const handleUnjoin = event => {
-    unjoinEvent(event);
+    unjoinEvent(event).then(() => window.location.reload());
   };
 
   return (

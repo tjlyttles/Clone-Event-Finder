@@ -23,7 +23,7 @@ const JoinButton = props => {
     ) {
       alert("Sorry, this event is full. 😟");
     } else {
-      joinEvent(eventInfo._id).then(() => setShowToast(true));
+      joinEvent(eventInfo._id).then(() => window.location.reload()).then(() => setShowToast(true));
      
     
       //       setEvent(urlId);

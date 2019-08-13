@@ -141,6 +141,7 @@ const EventState = props => {
       dispatch({
         type: UNJOIN_EVENT,
         payload: res.data
+        
       });
     } catch (err) {
       dispatch({
@@ -155,10 +156,7 @@ const EventState = props => {
     try {
       await axios.delete(`/api/events/${id}`);
 
-      dispatch({
-        type: DELETE_EVENT,
-        payload: id
-      });
+     
     } catch (err) {
       dispatch({
         type: EVENT_ERROR,
@@ -265,6 +263,7 @@ const EventState = props => {
         getUserEvents,
         getUsersProfile,
         addEvent,
+        sortEvents,
         joinEvent,
         unjoinEvent,
         deleteEvent,

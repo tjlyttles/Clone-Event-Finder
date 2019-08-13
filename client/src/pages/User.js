@@ -25,7 +25,7 @@ const User = props => {
     const authContext = useContext(AuthContext);
     const { user, updateUser } = authContext;
     const eventContext = useContext(EventContext);
-    const {  events, getUserEvents, pastEvents, upcomingEvents, userEvents } = eventContext;
+    const {  sortEvents, events, getUserEvents, pastEvents, upcomingEvents, userEvents } = eventContext;
 
     useEffect(() => {
         if (!user) {
