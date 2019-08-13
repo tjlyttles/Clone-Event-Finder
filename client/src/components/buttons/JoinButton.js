@@ -7,15 +7,16 @@ import EventContext from "../../context/event/eventContext";
 // Child of EventCard, EventCardPreview, ViewEvent
 const JoinButton = props => {
   const user = props.user;
+  //console.log(user)
 
   const event = props.event;
-  console.log(event)
+  //console.log(event)
   const eventContext = useContext(EventContext);
-  const { joinEvent } = eventContext;
+  const { joinEvent, callReRender,needReRender } = eventContext;
 
 
   const handleJoin = (eventInfo, setShowToast) => {
-    console.log(eventInfo);
+    //console.log(eventInfo);
     if (
       eventInfo.groupSize !== "Any" &&
       parseInt(eventInfo.groupSize) === eventInfo.attendingId.length
@@ -23,6 +24,8 @@ const JoinButton = props => {
       alert("Sorry, this event is full. 😟");
     } else {
       joinEvent(eventInfo._id).then(() => setShowToast(true));
+      callReRender(true);
+      console.log(needReRender)
       //       setEvent(urlId);
       //       getUsersProfile(urlId);
     }

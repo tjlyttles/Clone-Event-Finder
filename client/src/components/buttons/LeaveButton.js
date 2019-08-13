@@ -5,10 +5,11 @@ import EventContext from "../../context/event/eventContext";
   // Child of EventCard, EventCardPreview, ViewEvent
 const LeaveButton = props => {
   const eventContext = useContext(EventContext);
-  const { unjoinEvent } = eventContext;
+  const { unjoinEvent, callReRender } = eventContext;
 
   const handleUnjoin = event => {
     unjoinEvent(event);
+    callReRender(true)
   };
 
   return (

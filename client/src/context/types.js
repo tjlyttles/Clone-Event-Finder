@@ -24,3 +24,4 @@ export const FILTER_EVENTS = "FILTER_EVENTS";
 export const CLEAR_EVENTS = "CLEAR_EVENTS";
 export const CLEAR_FILTER = "CLEAR_FILTER";
 export const EVENT_ERROR = "EVENT_ERROR";
+export const EVENT_RERENDER = "EVENT_RERENDER";
