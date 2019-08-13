@@ -18,7 +18,8 @@ import {
   FILTER_EVENTS,
   CLEAR_EVENTS,
   CLEAR_FILTER,
-  EVENT_ERROR
+  EVENT_ERROR,
+  EVENT_RERENDER
 } from "../types";
 
 const EventState = props => {
@@ -245,6 +246,11 @@ const EventState = props => {
     dispatch({ type: CLEAR_CURRENT });
   };
 
+  // Need to be rerender flag
+  const callReRender = input => {
+    dispatch({type: EVENT_RERENDER, payload: input})
+  }
+
   return (
     <EventContext.Provider
       value={{
@@ -258,6 +264,7 @@ const EventState = props => {
         cacheEvent: state.cacheEvent,
         filtered: state.filtered,
         error: state.error,
+        needReRender: state.needReRender,
         getUserEvents,
         getUsersProfile,
         addEvent,
@@ -271,7 +278,8 @@ const EventState = props => {
         filterEvents,
         clearFilter,
         getEvents,
-        clearEvents
+        clearEvents,
+        callReRender
       }}
     >
       {props.children}

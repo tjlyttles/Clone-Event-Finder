@@ -33,15 +33,21 @@ const SearchEvent = () => {
     clearFilter,
     upcomingEvents,
     events,
-    filtered
+    filtered,
+    needReRender,
+    callReRender
   } = eventContext;
-  console.log(events);
+  //console.log(events);
 
   useEffect(() => {
-    getEvents();
-   
+    if (needReRender !== false) {
+      //console.log(needReRender)
+      getEvents();
+      callReRender(false)
+      //console.log(needReRender)
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [needReRender]);
 
   const handleChange = e => {
     if (text.current.value !== "") {
@@ -59,7 +65,7 @@ const SearchEvent = () => {
   if (!events || !user) {
     return <Loading />;
   }
-  console.log(events);
+  //console.log(events);
 
 //   return (
       

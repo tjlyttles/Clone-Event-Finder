@@ -14,7 +14,8 @@ import {
   FILTER_EVENTS,
   CLEAR_EVENTS,
   CLEAR_FILTER,
-  EVENT_ERROR
+  EVENT_ERROR,
+  EVENT_RERENDER
 } from "../types";
 
 export default (state, action) => {
@@ -147,6 +148,11 @@ export default (state, action) => {
         ...state,
         error: action.payload
       };
+    case EVENT_RERENDER:
+      return {
+        ...state,
+        needReRender: action.payload
+      }
     default:
       return state;
   }
