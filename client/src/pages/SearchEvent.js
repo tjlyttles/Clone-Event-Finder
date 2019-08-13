@@ -41,10 +41,10 @@ const SearchEvent = () => {
 
   useEffect(() => {
     if (needReRender !== false) {
-      console.log(needReRender)
+      //console.log(needReRender)
       getEvents();
       callReRender(false)
-      console.log(needReRender)
+      //console.log(needReRender)
     }
     // eslint-disable-next-line
   }, [needReRender]);
