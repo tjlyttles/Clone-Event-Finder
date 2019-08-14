@@ -14,15 +14,12 @@
 #user-event-tab-tab-past:hover,
 #user-event-tab-tab-future.active:hover,
 #user-event-tab-tab-past.active:hover {
-    font-size: 1.75rem;
-    color: #388bff;
     transition-duration: 125ms;
+    text-shadow: 0px 0px 4px #4093ff
 }
 
 #user-event-tab-tab-future.active,
 #user-event-tab-tab-past.active {
-    color: #006ccd;
-    font-size: 1.75rem;
-    font-weight:bolder;
-    
+    color: #388bff;
+    text-shadow: 0px 0px 10px #4093ff
 }
