@@ -16,6 +16,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import DataTimePicker from "react-datetime-picker"
 import AuthContext from "../../context/auth/authContext";
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 //import MapCont from "../components/Map";
@@ -59,9 +60,10 @@ const CreateEvent = props => {
     current
   } = eventContext;
   const { user } = authContext;
-  //const [date, setDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
+  const [date, setDate] = useState(new Date());
+  const [validated, setValidated] = useState(false);
+  // const [startTime, setStartTime] = useState(new Date());
+  // const [endTime, setEndTime] = useState(new Date());
   const [timeMessage, setTimeMessage] = useState("");
   const [event, setEvent] = useState({
     name: "",
@@ -82,46 +84,20 @@ const CreateEvent = props => {
       // console.log("missing user")
     }
   });
-useEffect (() => {
-  if(urlId) {
-  getCurrent(urlId)
-}
-
-}, [getCurrent, urlId])
-
   useEffect(() => {
-    setTimeMessage(null);
-    if (endTime <= startTime) {
-      setTimeMessage("The end time should be later than the start time");
+    if (urlId) {
+      getCurrent(urlId);
     }
-  }, [startTime, endTime]);
-
-  const handleStartTime = time => {
-    setStartTime(time);
-
-    const saveState = event;
-    saveState.start = time;
-    setEvent(saveState);
-    //setEvent({...event, [start]: date})
-  };
-
-  const handleEndTime = time => {
-    setEndTime(time);
-    console.log("Hello,why you don't work");
-
-    const saveState = event;
-    saveState.end = time;
-    setEvent(saveState);
-    //setEvent({...event, [start]: date})
-  };
-
+  }, [getCurrent, urlId]);
 
   const {
     name,
     location,
     category,
     groupSize,
-    description
+    description,
+    start,
+    end
     //addressInfo
   } = event;
 
@@ -133,6 +109,13 @@ useEffect (() => {
   const handleChange = e => {
     setEvent({ ...event, [e.target.name]: e.target.value });
   };
+  const handleStart = value => {
+    setEvent({ ...event, start: value });
+  };
+  const handleEnd = value => {
+    setEvent({ ...event, end: value });
+    console.log(event.end);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -142,38 +125,47 @@ useEffect (() => {
     let mapLatData;
     let mapLngData;
     console.log(userInput);
+    if (
+      event.name === "" ||
+      event.location === "" ||
+      event.groupSize === "" ||
+      event.start === null ||
+      event.end === null
+    ) {
+      alert("Please fill in required (*) fields.");
+    } else if (Date.parse(event.end) <= Date.parse(event.start)) {
+      alert("Please check your times are correct.");
+    } else {
+      Geocode.fromAddress(userInput)
+        .then(
+          response => {
+            const { lat, lng } = response.results[0].geometry.location;
+            console.log(lat, lng);
+            // setLocation({...locationInput, mapLat: lat})
+            // setLocation({...locationInput, mapLng: lng})
+            address = response.results[0].formatted_address;
+            mapLatData = lat;
+            mapLngData = lng;
+            console.log(response.results[0]);
+            placeId = response.results[0].place_id;
+          },
+          error => {
+            console.error(error);
+          }
+        )
+        .finally(() => {
+          const postEvent = { ...event };
+          postEvent.addressInfo = address;
+          postEvent.mapLat = mapLatData;
+          postEvent.mapLng = mapLngData;
+          setEvent(postEvent);
 
-    Geocode.fromAddress(userInput)
-      .then(
-        response => {
-          const { lat, lng } = response.results[0].geometry.location;
-          console.log(lat, lng);
-          // setLocation({...locationInput, mapLat: lat})
-          // setLocation({...locationInput, mapLng: lng})
-          address = response.results[0].formatted_address;
-          mapLatData = lat;
-          mapLngData = lng;
-          console.log(response.results[0]);
-          placeId = response.results[0].place_id;
-        },
-        error => {
-          console.error(error);
-        }
-      )
-      .finally(() => {
-        const postEvent = { ...event };
-        postEvent.addressInfo = address;
-        postEvent.mapLat = mapLatData;
-        postEvent.mapLng = mapLngData;
-        setEvent(postEvent);
-        if (current) {
-          updateEvent(event);
-        } else {
           addEvent(postEvent);
-        }
-        history.push("/user");
-        //console.log(e)
-      });
+
+          history.push("/user");
+          //console.log(e)
+        });
+    }
   };
 
   // const clearAll = () => {
@@ -208,15 +200,17 @@ useEffect (() => {
               {current ? "Edit Event" : "Create Event"}
             </Card.Title>
             <Card.Body>
-              <Form onSubmit={handleSubmit}>
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group controlId="exampleForm.ControlInput1">
                   <InputGroup className="mb-3">
                     <InputGroup.Prepend>
                       <InputGroup.Text id="inputGroup-sizing-default">
-                        Event Name:
+                        *Event Name:
                       </InputGroup.Text>
+                    
                     </InputGroup.Prepend>
                     <FormControl
+                      required
                       value={name}
                       type="text"
                       name="name"
@@ -231,10 +225,11 @@ useEffect (() => {
                   <InputGroup className="mb-3">
                     <InputGroup.Prepend>
                       <InputGroup.Text id="inputGroup-sizing-default">
-                        Event Location:
+                        *Event Location:
                       </InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
+                      required
                       value={location}
                       type="text"
                       name="location"
@@ -264,7 +259,7 @@ useEffect (() => {
                   </Col>
                   <Col>
                     <Form.Label>
-                      How many would you like to join you:
+                      *Up to how many would you like to join you:
                     </Form.Label>
 
                     <div
@@ -275,10 +270,10 @@ useEffect (() => {
                       <Form.Check
                         custom
                         inline
-                        checked={groupSize === "1"}
+                        checked={groupSize === "2"}
                         onChange={handleChange}
-                        label="1"
-                        value="1"
+                        label="+1"
+                        value="2"
                         name="groupSize"
                         type="radio"
                         id={`custom-inline-radio-1`}
@@ -286,10 +281,10 @@ useEffect (() => {
                       <Form.Check
                         custom
                         inline
-                        checked={groupSize === "2"}
+                        checked={groupSize === "3"}
                         onChange={handleChange}
-                        label="2"
-                        value="2"
+                        label="+2"
+                        value="3"
                         name="groupSize"
                         type="radio"
                         id={`custom-inline-radio-2`}
@@ -297,10 +292,10 @@ useEffect (() => {
                       <Form.Check
                         custom
                         inline
-                        checked={groupSize === "3"}
+                        checked={groupSize === "4"}
                         onChange={handleChange}
-                        label="3"
-                        value="3"
+                        label="+3"
+                        value="4"
                         name="groupSize"
                         type="radio"
                         id={`custom-inline-radio-3`}
@@ -309,9 +304,9 @@ useEffect (() => {
                         custom
                         inline
                         onChange={handleChange}
-                        label="4"
-                        value="4"
-                        checked={groupSize === "4"}
+                        label="+4"
+                        value="5"
+                        checked={groupSize === "5"}
                         name="groupSize"
                         type="radio"
                         id={`custom-inline-radio-4`}
@@ -319,11 +314,11 @@ useEffect (() => {
                       <Form.Check
                         custom
                         inline
-                        checked={groupSize === "5"}
+                        checked={groupSize === "6"}
                         onChange={handleChange}
-                        label="5"
+                        label="+5"
                         name="groupSize"
-                        value="5"
+                        value="6"
                         type="radio"
                         id={`custom-inline-radio-5`}
                       />
@@ -357,66 +352,24 @@ useEffect (() => {
                   </Col>
                   <Col>
                     <div>
-                      <div className="text-danger">
-                        {timeMessage ? timeMessage : ""}
-                      </div>
-                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around">
-                          <KeyboardDatePicker
-                            minDate="0"
-                            margin="normal"
-                            id="startDate"
-                            name="date"
-                            label="Select event start date"
-                            value={startTime}
-                            onChange={handleStartTime}
-                            KeyboardButtonProps={{
-                              "aria-label": "change date"
-                            }}
-                            disablePast
-                          />
-                          <KeyboardTimePicker
-                            minDate="0"
-                            margin="normal"
-                            id="startTime"
-                            name="time"
-                            label="Select a time to meet"
-                            value={startTime}
-                            onChange={handleStartTime}
-                            KeyboardButtonProps={{
-                              "aria-label": "change time"
-                            }}
-                          />
-                        </Grid>
-
-                        {
-                          <Grid container justify="space-around">
-                            <KeyboardDatePicker
-                              minDate="0"
-                              margin="normal"
-                              id="endDate"
-                              label="Day event ends"
-                              value={endTime}
-                              onChange={handleEndTime}
-                              KeyboardButtonProps={{
-                                "aria-label": "change date"
-                              }}
-                              disablePast
-                            />
-                            <KeyboardTimePicker
-                              minDate="0"
-                              margin="normal"
-                              id="endTime"
-                              label="Time event ends"
-                              value={endTime}
-                              onChange={handleEndTime}
-                              KeyboardButtonProps={{
-                                "aria-label": "change time"
-                              }}
-                            />
-                          </Grid>
-                        }
-                      </MuiPickersUtilsProvider>
+                     
+                      <h6>*Start Date and Time:</h6>
+                      <DateTimePicker
+                        //requred="true"
+                        minDate={date}
+                        name="start"
+                        value={start}
+                        onChange={handleStart}
+                      />
+                      <br />
+                      <h6>*End Date and Time:</h6>
+                      <DateTimePicker
+                        //requred="true"
+                        minDate={date}
+                        name="end"
+                        value={end}
+                        onChange={handleEnd}
+                      />
                     </div>
                   </Col>
                 </Row>
@@ -425,7 +378,7 @@ useEffect (() => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Button variant="outline-primary" type="submit">
-                    {current ? "Update Event" : "Submit"}
+                    Submit
                   </Button>
                   <Link to="/user">
                     <Button onClick={goBack} variant="outline-info">

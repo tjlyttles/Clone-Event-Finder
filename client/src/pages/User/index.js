@@ -106,7 +106,12 @@ const User = props => {
                                     : "Bio: " + (user && user.bio)}
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer>
+                        <Card.Footer
+                            style={{
+                                textAlign: "right",
+                                background: "#343a40",
+                                color: "white"
+                            }}>
                             <Link to="#" onClick={() => setShowProfile(true)}>Edit profile</Link><br />
                             <Link to="#" onClick={() => setShowPassword(true)}>Change password</Link>
                         </Card.Footer>

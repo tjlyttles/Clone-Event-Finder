@@ -24,6 +24,7 @@ export default (state, action) => {
       return {
         ...state,
         current: null,
+        setUsers: null,
         userEvents: null,
         events: action.payload
       };
@@ -31,18 +32,20 @@ export default (state, action) => {
       return {
         ...state,
         current: null,
+        setUsers: null,
         events: null,
         userEvents: action.payload
       };
     case SORT_EVENTS:
-      if(state.events) {return {
-        ...state,
-        upcomingEvents: state.events.filter(
-          event => new Date(event.end) > new Date()
-        ),
-        loading: false
-      } 
-      }else if (state.userEvents) {
+      if (state.events) {
+        return {
+          ...state,
+          upcomingEvents: state.events.filter(
+            event => new Date(event.end) > new Date()
+          ),
+          loading: false
+        };
+      } else if (state.userEvents) {
         return {
           ...state,
           upcomingEvents: state.userEvents.filter(
@@ -52,7 +55,7 @@ export default (state, action) => {
             event => new Date(event.end) < new Date()
           ),
           loading: false
-        } 
+        };
       }
       return {
         ...state,
@@ -77,12 +80,7 @@ export default (state, action) => {
         setUsers: action.payload,
         loading: false
       };
-    case CLEAR_USERS:
-      return {
-        ...state,
-        setUsers: null
-      };
-   
+
     case UNJOIN_EVENT:
     case JOIN_EVENT:
       if (state.current) {
@@ -103,14 +101,6 @@ export default (state, action) => {
           )
         };
       }
-    // case DELETE_EVENT:
-    //   if(state.userEvents) {
-    //   else if (state.event) {return {
-    //     ...state,
-    //     events: state.events.filter(event => event._id !== action.payload),
-    //     loading: false
-    //   }}
-
     case CLEAR_EVENTS:
       return {
         ...state,
@@ -147,7 +137,7 @@ export default (state, action) => {
       return {
         ...state,
         needReRender: action.payload
-      }
+      };
     default:
       return state;
   }
