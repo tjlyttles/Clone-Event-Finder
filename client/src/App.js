@@ -9,7 +9,7 @@ import history from "./utils/history";
 import Navigation from "./components/Navigation/index"
 import Home from "./pages/Home";
 import User from "./pages/User/index";
-import EditEvent from "./pages/EditEvent"
+import EditEvent from "./pages/EditEvent/index"
 import CreateEvent from "./pages/CreateEvent/index";
 import SearchEvent from "./pages/SearchEvent";
 import ViewEvent from "./pages/ViewEvent";
