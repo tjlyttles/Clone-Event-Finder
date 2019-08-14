@@ -24,7 +24,7 @@ const LeaveButton = props => {
 
     <Button
       type="submit"
-      variant="warning"
+      variant="outline-warning"
       onClick={() => handleUnjoin(props.event._id)}
       size="sm"
       style={{ float: "right" }}

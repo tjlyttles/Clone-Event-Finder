@@ -76,6 +76,11 @@ const EventCard = props => {
                                 </Card.Subtitle>
                             </Card.Header>
                             <Card.Body>
+                            <Card.Text>
+                                    Descriptions: {event.description}<br />
+                                    
+                                   
+                                </Card.Text>
                                 <Card.Text style={{ textTransform: "capitalize" }}>
                                     Location: {event.addressInfo}<br />
                                     

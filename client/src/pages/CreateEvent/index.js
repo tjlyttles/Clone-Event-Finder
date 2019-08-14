@@ -352,7 +352,7 @@ const CreateEvent = props => {
                   </Col>
                   <Col>
                     <div>
-                     
+                  
                       <h6>*Start Date and Time:</h6>
                       <DateTimePicker
                         //requred="true"
@@ -361,6 +361,7 @@ const CreateEvent = props => {
                         value={start}
                         onChange={handleStart}
                       />
+                      <br />
                       <br />
                       <h6>*End Date and Time:</h6>
                       <DateTimePicker
