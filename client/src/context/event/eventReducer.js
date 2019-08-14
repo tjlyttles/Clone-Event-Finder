@@ -102,15 +102,7 @@ export default (state, action) => {
             event._id === action.payload._id ? action.payload : event
           )
         };
-      }
-    // case DELETE_EVENT:
-    //   if(state.userEvents) {
-    //   else if (state.event) {return {
-    //     ...state,
-    //     events: state.events.filter(event => event._id !== action.payload),
-    //     loading: false
-    //   }}
-
+      };
     case CLEAR_EVENTS:
       return {
         ...state,

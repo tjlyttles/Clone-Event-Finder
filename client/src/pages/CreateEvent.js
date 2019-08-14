@@ -16,6 +16,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import DateTimePicker from "react-datetime-picker";
 import AuthContext from "../context/auth/authContext";
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 //import MapCont from "../components/Map";
@@ -58,7 +59,7 @@ const CreateEvent = props => {
     current
   } = eventContext;
   const { user } = authContext;
-  //const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(new Date());
   const [startTime, setStartTime] = useState(new Date());
   const [endTime, setEndTime] = useState(new Date());
   const [timeMessage, setTimeMessage] = useState("");
@@ -81,12 +82,11 @@ const CreateEvent = props => {
       // console.log("missing user")
     }
   });
-useEffect (() => {
-  if(urlId) {
-  getCurrent(urlId)
-}
-
-}, [getCurrent, urlId])
+  useEffect(() => {
+    if (urlId) {
+      getCurrent(urlId);
+    }
+  }, [getCurrent, urlId]);
 
   useEffect(() => {
     setTimeMessage(null);
@@ -114,13 +114,14 @@ useEffect (() => {
     //setEvent({...event, [start]: date})
   };
 
-
   const {
     name,
     location,
     category,
     groupSize,
-    description
+    description,
+    start,
+    end
     //addressInfo
   } = event;
 
@@ -132,6 +133,13 @@ useEffect (() => {
   const handleChange = e => {
     setEvent({ ...event, [e.target.name]: e.target.value });
   };
+  const handleStart = value => {
+    setEvent({ ...event, start: value })
+  };
+  const handleEnd = value => {
+    setEvent({ ...event, end: value });
+    console.log(event.end);
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -141,38 +149,39 @@ useEffect (() => {
     let mapLatData;
     let mapLngData;
     console.log(userInput);
+    if (Date.parse(event.end) >= Date.parse(event.start)) {
+      alert("Please check your times are correct.");
+    } else {
+      Geocode.fromAddress(userInput)
+        .then(
+          response => {
+            const { lat, lng } = response.results[0].geometry.location;
+            console.log(lat, lng);
+            // setLocation({...locationInput, mapLat: lat})
+            // setLocation({...locationInput, mapLng: lng})
+            address = response.results[0].formatted_address;
+            mapLatData = lat;
+            mapLngData = lng;
+            console.log(response.results[0]);
+            placeId = response.results[0].place_id;
+          },
+          error => {
+            console.error(error);
+          }
+        )
+        .finally(() => {
+          const postEvent = { ...event };
+          postEvent.addressInfo = address;
+          postEvent.mapLat = mapLatData;
+          postEvent.mapLng = mapLngData;
+          setEvent(postEvent);
 
-    Geocode.fromAddress(userInput)
-      .then(
-        response => {
-          const { lat, lng } = response.results[0].geometry.location;
-          console.log(lat, lng);
-          // setLocation({...locationInput, mapLat: lat})
-          // setLocation({...locationInput, mapLng: lng})
-          address = response.results[0].formatted_address;
-          mapLatData = lat;
-          mapLngData = lng;
-          console.log(response.results[0]);
-          placeId = response.results[0].place_id;
-        },
-        error => {
-          console.error(error);
-        }
-      )
-      .finally(() => {
-        const postEvent = { ...event };
-        postEvent.addressInfo = address;
-        postEvent.mapLat = mapLatData;
-        postEvent.mapLng = mapLngData;
-        setEvent(postEvent);
-        if (current) {
-          updateEvent(event);
-        } else {
           addEvent(postEvent);
-        }
-        history.push("/user");
-        //console.log(e)
-      });
+
+          history.push("/user");
+          //console.log(e)
+        });
+    }
   };
 
   // const clearAll = () => {
@@ -359,7 +368,7 @@ useEffect (() => {
                       <div className="text-danger">
                         {timeMessage ? timeMessage : ""}
                       </div>
-                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      {/* <MuiPickersUtilsProvider utils={DateFnsUtils}>
                         <Grid container justify="space-around">
                           <KeyboardDatePicker
                             minDate="0"
@@ -415,7 +424,24 @@ useEffect (() => {
                             />
                           </Grid>
                         }
-                      </MuiPickersUtilsProvider>
+                      </MuiPickersUtilsProvider> */}
+                      <h6>Start Date and Time:</h6>
+                      <DateTimePicker
+                        requred="true"
+                        minDate={date}
+                        name="start"
+                        value={start}
+                        onChange={handleStart}
+                      />
+                      <br />
+                      <h6>End Date and Time:</h6>
+                      <DateTimePicker
+                        requred="true"
+                        minDate={date}
+                        name="end"
+                        value={end}
+                        onChange={handleEnd}
+                      />
                     </div>
                   </Col>
                 </Row>

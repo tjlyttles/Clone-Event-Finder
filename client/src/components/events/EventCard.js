@@ -76,8 +76,8 @@ const EventCard = props => {
                                 <Card.Text style={{ textTransform: "capitalize" }}>
                                     Location: {event.location}<br />
                                     {eventAddress}
-                                    Start: {event.start}<br />
-                                    End: {event.end}
+                                    Start: {event.start.toLocaleString()}<br />
+                                    End: {event.end.toLocaleString()}
                                 </Card.Text>
                                 <Card.Subtitle className="mb-2 text-muted">
                                     People Going: {event.attendingId.length} / {event.groupSize}
