@@ -17,7 +17,6 @@ import EventCard from "../components/events/EventCard";
 
 // Parent
 const ViewEvent = props => {
-    
   useEffect(() => {
     //console.log("run")
     if (!user) {
@@ -25,11 +24,11 @@ const ViewEvent = props => {
       authContext.loadUser();
       //console.log(user)
     }
-    
+
     // eslint-disable-next-line
   });
   const urlId = props.match.params.id;
-  console.log(props.match.params.id)
+  console.log(props.match.params.id);
   const authContext = useContext(AuthContext);
   const eventContext = useContext(EventContext);
   const {
@@ -57,24 +56,18 @@ const ViewEvent = props => {
   //const user = '';
   const [showAlert, setShowAlert] = useState(false);
   useEffect(() => {
-   
     if (current) {
-        setEvent(current)
-
+      setEvent(current);
     }
-      
+
     // eslint-disable-next-line
   }, [current, user]);
 
   useEffect(() => {
-   
-      getCurrent(urlId)
-      
+    getCurrent(urlId);
+
     // eslint-disable-next-line
   }, []);
-
-
-
 
   console.log(current);
 
@@ -94,31 +87,19 @@ const ViewEvent = props => {
     end: null,
     mapLat: null,
     mapLng: null
-});
+  });
 
-  const {
-    name,
-    location,
-    addressInfo,
-    category,
-    groupSize,
-    description,
-    attendingId,
-    start,
-    end,
-    mapLat,
-    mapLng
-  } = event;
+  const { mapLat, mapLng } = event;
+  console.log(mapLat);
 
   const handleDelete = () => {
     setShowAlert(false);
     deleteEvent(current._id);
-   history.push("/user");
+    history.push("/user");
   };
   if (!user) {
     return <Loading />;
   }
-
 
   if (showAlert) {
     return (
@@ -136,14 +117,10 @@ const ViewEvent = props => {
   }
 
   return (
-   
     <Fragment>
-    {current === null ? (
-      <h1>
-        This event is not available.
-      </h1>
-    ) : (
-      <Fragment>
+      {mapLat === null && mapLng === null ? (
+        <h1>This event is not available.</h1>
+      ) : (
         <CardGroup>
           <EventCard
             key={event._id}
@@ -151,24 +128,15 @@ const ViewEvent = props => {
             user={user}
             showAddress={showAddress}
             showViewLink={showViewLink}
-            setShowToast={setShowToast} 
+            setShowToast={setShowToast}
           />
-          {/* <Card><Map lat={mapLat} lng={mapLng} /></Card> */}
+          <Card style={{ padding: 10 }}>
+            <Map lat={mapLat} lng={mapLng} />
+          </Card>
         </CardGroup>
-    
-      </Fragment>
-    )
-    // )
-    // : (
-    //     <div> Sorry, this event is not available.</div>
-    //   )
-    }
-
-    {/* <Toast event={events} showToast={showToast} setShowToast={setShowToast} /> */}
-  </Fragment>
+      )}{" "}
+    </Fragment>
   );
-}
-
-
+};
 
 export default ViewEvent;

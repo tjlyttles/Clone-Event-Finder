@@ -105,7 +105,12 @@ const User = props => {
                                     : "Bio: " + (user && user.bio)}
                             </Card.Text>
                         </Card.Body>
-                        <Card.Footer>
+                        <Card.Footer
+                            style={{
+                                textAlign: "right",
+                                background: "#343a40",
+                                color: "white"
+                            }}>
                             <Link to="#" onClick={() => setShowProfile(true)}>Edit profile</Link><br />
                             <Link to="#" onClick={() => setShowPassword(true)}>Change password</Link>
                         </Card.Footer>
@@ -185,13 +190,12 @@ const User = props => {
                                 />
                             </Form.Group>
                             <Row className="justify-content-center">
-                                <Button variant="primary" type="submit" style={{ margin: "0 5px" }}>
+                                <Button type="submit" style={{ margin: "0 5px" }}>
                                     Submit
                   </Button>
                                 <Button
                                     onClick={() => setShowProfile(false)}
                                     style={{ margin: "0 5px" }}
-                                    variant = "danger"
                                 >
                                     Cancel
                   </Button>
@@ -223,12 +227,11 @@ const User = props => {
                                     type="password"
                                     placeholder="Verify Password"
                                     onChange={e => setPasswordMatch(e.target.value)}
-                                    variant = "primary"
                                 />
                             </Form.Group>
                             <Row className="justify-content-center">
                                 <Button type="submit" style={{ margin: "0 5px" }}>Submit</Button>
-                                <Button onClick={() => setShowPassword(false)} style={{ margin: "0 5px" }} variant="danger">Cancel</Button>
+                                <Button onClick={() => setShowPassword(false)} style={{ margin: "0 5px" }}>Cancel</Button>
                             </Row>
                         </Form>
                     </Modal.Body>

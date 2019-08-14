@@ -7,6 +7,7 @@ import DeleteButton from "../buttons/DeleteButton";
 import JoinButton from "../buttons/JoinButton";
 import LeaveButton from "../buttons/LeaveButton";
 import EventContext from "../../context/event/eventContext";
+import moment from "moment"
 
 //import EventAPI from "../../utils/EventAPI";
 // child of searchevent, userevent
@@ -67,24 +68,24 @@ const EventCard = props => {
                         ? <DeleteAlert />
                         : <Fragment>
                             <Card.Header style={{ background: "#343a40", color: "white" }}>
-                                <Card.Title>preview {event.name.toUpperCase()}</Card.Title>
+                                <Card.Title><Link to={`/view/${event._id}`} className="card-link"> {event.name.toUpperCase()}</Link></Card.Title>
                                 <Card.Subtitle className="mb-2 text-muted">
                                     {event.category}
                                 </Card.Subtitle>
                             </Card.Header>
                             <Card.Body>
                                 <Card.Text style={{ textTransform: "capitalize" }}>
-                                    Location: {event.location}<br />
-                                    {eventAddress}
-                                    Start: {event.start.toLocaleString()}<br />
-                                    End: {event.end.toLocaleString()}
+                                    Location: {event.addressInfo}<br />
+                                    
+                                    Start: {moment(event.start).format('MMMM Do YYYY, h:mm:ss a')}<br />
+                                    End: {moment(event.end).format('MMMM Do YYYY, h:mm:ss a')}
                                 </Card.Text>
                                 <Card.Subtitle className="mb-2 text-muted">
-                                    People Going: {event.attendingId.length} / {event.groupSize}
+                                    People Going: { event.groupSize === "Any" ? ("Free for all to join."):( <Fragment>{event.attendingId.length} / {event.groupSize}</Fragment>)}
                                 </Card.Subtitle>
                             </Card.Body>
-                            <Card.Footer style={{ background: "#343a40", color: "white" }}>
-                                {viewLink}
+                            <Card.Footer style={{ background: "#343a40" }}>
+                                
                                 {user._id === event.user && (
                                     <Fragment>
                                         <DeleteButton
