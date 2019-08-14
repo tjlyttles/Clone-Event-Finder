@@ -76,16 +76,16 @@ const EventCard = props => {
                                 </Card.Subtitle>
                             </Card.Header>
                             <Card.Body>
-                            <Card.Text>
+                            {setUsers && (<Card.Text>
                                     Descriptions: {event.description}<br />
                                     
                                    
-                                </Card.Text>
+                                </Card.Text>)}
                                 <Card.Text style={{ textTransform: "capitalize" }}>
-                                    Location: {event.addressInfo}<br />
+                                    Location: {event.location} <br/>{event.addressInfo}<br />
                                     
                                     Start: {moment(event.start).format('MMMM Do YYYY, h:mm:ss a')}<br />
-                                    "End:" {moment(event.end).format('MMMM Do YYYY, h:mm:ss a')}
+                                    End: {moment(event.end).format('MMMM Do YYYY, h:mm:ss a')}
                                 </Card.Text>
                                 <Card.Subtitle className="mb-2 text-muted">
                                     People Going: { event.groupSize === "Any" ? ("Free for all to join."):( <Fragment>{event.attendingId.length} / {event.groupSize}</Fragment>)}

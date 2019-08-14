@@ -84,11 +84,7 @@ const CreateEvent = props => {
       // console.log("missing user")
     }
   });
-  useEffect(() => {
-    if (urlId) {
-      getCurrent(urlId);
-    }
-  }, [getCurrent, urlId]);
+
 
   const {
     name,
@@ -353,7 +349,7 @@ const CreateEvent = props => {
                   <Col>
                     <div>
                   
-                      <h6>*Start Date and Time:</h6>
+                      <h6>*Date and time to meet up:</h6>
                       <DateTimePicker
                         //requred="true"
                         minDate={date}
@@ -363,7 +359,7 @@ const CreateEvent = props => {
                       />
                       <br />
                       <br />
-                      <h6>*End Date and Time:</h6>
+                      <h6>*When the event will end:</h6>
                       <DateTimePicker
                         //requred="true"
                         minDate={date}

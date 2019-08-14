@@ -4,18 +4,12 @@ import InputGroup from "react-bootstrap/InputGroup";
 import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Card from "react-bootstrap/Card";
-import Grid from "@material-ui/core/Grid";
 import history from "../../utils/history";
-import DateFnsUtils from "@date-io/date-fns";
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker
-} from "@material-ui/pickers";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
+import DateTimePicker from "react-datetime-picker"
 import AuthContext from "../../context/auth/authContext";
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 //import MapCont from "../components/Map";
@@ -52,17 +46,15 @@ const CreateEvent = props => {
   const eventContext = useContext(EventContext);
   const authContext = useContext(AuthContext);
   const {
-    addEvent,
+    
     updateEvent,
     clearCurrent,
     getCurrent,
     current
   } = eventContext;
   const { user } = authContext;
-  //const [date, setDate] = useState(new Date());
-  const [startTime, setStartTime] = useState(new Date());
-  const [endTime, setEndTime] = useState(new Date());
-  const [timeMessage, setTimeMessage] = useState("");
+  const [date, setDate] = useState(new Date());
+
   const [event, setEvent] = useState({
     name: "",
     location: "",
@@ -89,52 +81,23 @@ const CreateEvent = props => {
     // eslint-disable-next-line
   }, []);
 
-  useEffect(() => {
-    setTimeMessage(null);
-    if (endTime <= startTime) {
-      setTimeMessage("The end time should be later than the start time");
-    }
-  }, [startTime, endTime]);
-
-  const handleStartTime = time => {
-    setStartTime(time);
-
-    const saveState = event;
-    saveState.start = time;
-    setEvent(saveState);
-    //setEvent({...event, [start]: date})
-  };
-
-  const handleEndTime = time => {
-    setEndTime(time);
-    console.log("Hello,why you don't work");
-
-    const saveState = event;
-    saveState.end = time;
-    setEvent(saveState);
-    //setEvent({...event, [start]: date})
-  };
+ 
   useEffect(() => {
     if (current) {
       setEvent(current);
-      setStartTime(current.start);
-      setEndTime(current.end);
-    } else {
-      // setEvent({
-      //   category: "Movie",
-      //   groupSize: "",
-      //   addressInfo: ""
-      // });
-      console.log("No event yet");
-    }
-  }, [eventContext, current]);
+     
+    } 
+  }, [eventContext]);
+
 
   const {
     name,
     location,
     category,
     groupSize,
-    description
+    description,
+    start,
+    end
     //addressInfo
   } = event;
 
@@ -145,6 +108,13 @@ const CreateEvent = props => {
 
   const handleChange = e => {
     setEvent({ ...event, [e.target.name]: e.target.value });
+  };
+  const handleStart = value => {
+    setEvent({ ...event, start: value });
+  };
+  const handleEnd = value => {
+    setEvent({ ...event, end: value });
+    console.log(event.end);
   };
 
   const handleSubmit = e => {
@@ -179,11 +149,9 @@ const CreateEvent = props => {
         postEvent.mapLat = mapLatData;
         postEvent.mapLng = mapLngData;
         setEvent(postEvent);
-        if (current) {
-          updateEvent(event);
-        } else {
-          addEvent(postEvent);
-        }
+      
+          updateEvent(postEvent);
+       
         history.push("/user");
         //console.log(e)
       });
@@ -216,20 +184,22 @@ const CreateEvent = props => {
       <br />
       <Row>
         <Col>
-          <Card id="edit-event">
-            <Card.Title id="edit-event-tittle" style={{ textAlign: "center" }}>
+          <Card id="create-event">
+            <Card.Title id="create-event-tittle" style={{ textAlign: "center" }}>
               {current ? "Edit Event" : "Create Event"}
             </Card.Title>
             <Card.Body>
-              <Form onSubmit={handleSubmit}>
+              <Form  onSubmit={handleSubmit}>
                 <Form.Group controlId="exampleForm.ControlInput1">
                   <InputGroup className="mb-3">
                     <InputGroup.Prepend>
                       <InputGroup.Text id="inputGroup-sizing-default">
-                        Event Name:
+                        *Event Name:
                       </InputGroup.Text>
+                    
                     </InputGroup.Prepend>
                     <FormControl
+                      required
                       value={name}
                       type="text"
                       name="name"
@@ -244,10 +214,11 @@ const CreateEvent = props => {
                   <InputGroup className="mb-3">
                     <InputGroup.Prepend>
                       <InputGroup.Text id="inputGroup-sizing-default">
-                        Event Location:
+                        *Event Location:
                       </InputGroup.Text>
                     </InputGroup.Prepend>
                     <FormControl
+                      required
                       value={location}
                       type="text"
                       name="location"
@@ -277,7 +248,7 @@ const CreateEvent = props => {
                   </Col>
                   <Col>
                     <Form.Label>
-                      How many would you like to join you:
+                      *Up to how many would you like to join you:
                     </Form.Label>
 
                     <div
@@ -288,10 +259,10 @@ const CreateEvent = props => {
                       <Form.Check
                         custom
                         inline
-                        checked={groupSize === "1"}
+                        checked={groupSize === "2"}
                         onChange={handleChange}
-                        label="1"
-                        value="1"
+                        label="+1"
+                        value="2"
                         name="groupSize"
                         type="radio"
                         id={`custom-inline-radio-1`}
@@ -299,10 +270,10 @@ const CreateEvent = props => {
                       <Form.Check
                         custom
                         inline
-                        checked={groupSize === "2"}
+                        checked={groupSize === "3"}
                         onChange={handleChange}
-                        label="2"
-                        value="2"
+                        label="+2"
+                        value="3"
                         name="groupSize"
                         type="radio"
                         id={`custom-inline-radio-2`}
@@ -310,10 +281,10 @@ const CreateEvent = props => {
                       <Form.Check
                         custom
                         inline
-                        checked={groupSize === "3"}
+                        checked={groupSize === "4"}
                         onChange={handleChange}
-                        label="3"
-                        value="3"
+                        label="+3"
+                        value="4"
                         name="groupSize"
                         type="radio"
                         id={`custom-inline-radio-3`}
@@ -322,9 +293,9 @@ const CreateEvent = props => {
                         custom
                         inline
                         onChange={handleChange}
-                        label="4"
-                        value="4"
-                        checked={groupSize === "4"}
+                        label="+4"
+                        value="5"
+                        checked={groupSize === "5"}
                         name="groupSize"
                         type="radio"
                         id={`custom-inline-radio-4`}
@@ -332,11 +303,11 @@ const CreateEvent = props => {
                       <Form.Check
                         custom
                         inline
-                        checked={groupSize === "5"}
+                        checked={groupSize === "6"}
                         onChange={handleChange}
-                        label="5"
+                        label="+5"
                         name="groupSize"
-                        value="5"
+                        value="6"
                         type="radio"
                         id={`custom-inline-radio-5`}
                       />
@@ -370,66 +341,25 @@ const CreateEvent = props => {
                   </Col>
                   <Col>
                     <div>
-                      <div className="text-danger">
-                        {timeMessage ? timeMessage : ""}
-                      </div>
-                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                        <Grid container justify="space-around">
-                          <KeyboardDatePicker
-                            minDate="0"
-                            margin="normal"
-                            id="startDate"
-                            name="date"
-                            label="Select event start date"
-                            value={startTime}
-                            onChange={handleStartTime}
-                            KeyboardButtonProps={{
-                              "aria-label": "change date"
-                            }}
-                            disablePast
-                          />
-                          <KeyboardTimePicker
-                            minDate="0"
-                            margin="normal"
-                            id="startTime"
-                            name="time"
-                            label="Select a time to meet"
-                            value={startTime}
-                            onChange={handleStartTime}
-                            KeyboardButtonProps={{
-                              "aria-label": "change time"
-                            }}
-                          />
-                        </Grid>
-
-                        {
-                          <Grid container justify="space-around">
-                            <KeyboardDatePicker
-                              minDate="0"
-                              margin="normal"
-                              id="endDate"
-                              label="Day event ends"
-                              value={endTime}
-                              onChange={handleEndTime}
-                              KeyboardButtonProps={{
-                                "aria-label": "change date"
-                              }}
-                              disablePast
-                            />
-                            <KeyboardTimePicker
-                              minDate="0"
-                              margin="normal"
-                              id="endTime"
-                              label="Time event ends"
-                              value={endTime}
-                              onChange={handleEndTime}
-                              KeyboardButtonProps={{
-                                "aria-label": "change time"
-                              }}
-                            />
-                          </Grid>
-                        }
-                      </MuiPickersUtilsProvider>
+                  
+                      <h6>*Date and time to meet up:</h6>
+                      <DateTimePicker
+                        //requred="true"
+                        minDate={date}
+                        name="start"
+                        value={start}
+                        onChange={handleStart}
+                      />
+                      <br />
+                      <br />
+                      <h6>*When the event will end:</h6>
+                      <DateTimePicker
+                        //requred="true"
+                        minDate={date}
+                        name="end"
+                        value={end}
+                        onChange={handleEnd}
+                      />
                     </div>
                   </Col>
                 </Row>
@@ -438,7 +368,7 @@ const CreateEvent = props => {
                   style={{ display: "flex", justifyContent: "space-between" }}
                 >
                   <Button variant="outline-primary" type="submit">
-                    {current ? "Update Event" : "Submit"}
+                    Submit
                   </Button>
                   <Link to="/user">
                     <Button onClick={goBack} variant="outline-info">
