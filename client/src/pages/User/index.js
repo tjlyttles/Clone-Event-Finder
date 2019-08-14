@@ -63,7 +63,7 @@ const User = props => {
             image: image,
             bio: bio,
             email: email
-        });
+        }).then(() => window.location.reload());
         setShowProfile(false);
     };
 
@@ -79,7 +79,7 @@ const User = props => {
             updateUser({
                 ...user,
                 password: passwordMatch
-            });
+            }).then(() => window.location.reload());
         }
         setShowPassword(false);
     };
