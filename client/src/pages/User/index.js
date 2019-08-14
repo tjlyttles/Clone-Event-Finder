@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
 import EventContext from "../../context/event/eventContext";
 import Loading from "../../components/Loading";
-import UserEvents from "../../components/events/UserEvents";
+import UserEvents from "../../components/events/UserEvents/index";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";

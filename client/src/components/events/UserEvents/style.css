@@ -1,0 +1,28 @@
+
+
+
+#user-event-tab-tab-future,
+#user-event-tab-tab-past {
+    border:none;
+    border-radius: 0px;
+    font-size: 1.5rem;
+    color: #020202;
+    padding:0px 16px 0px 16px;
+}
+
+#user-event-tab-tab-future:hover,
+#user-event-tab-tab-past:hover,
+#user-event-tab-tab-future.active:hover,
+#user-event-tab-tab-past.active:hover {
+    font-size: 1.75rem;
+    color: #388bff;
+    transition-duration: 125ms;
+}
+
+#user-event-tab-tab-future.active,
+#user-event-tab-tab-past.active {
+    color: #006ccd;
+    font-size: 1.75rem;
+    font-weight:bolder;
+    
+}

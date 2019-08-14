@@ -16,7 +16,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import DataTimePicker from "react-datetime-picker"
+import DateTimePicker from "react-datetime-picker"
 import AuthContext from "../../context/auth/authContext";
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 //import MapCont from "../components/Map";
