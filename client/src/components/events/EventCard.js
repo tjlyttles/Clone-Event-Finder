@@ -14,6 +14,8 @@ import moment from "moment"
 const EventCard = props => {
     const user = props.user;
     const event = props.event;
+    const setUsers = props.setUsers
+    console.log(setUsers)
     
     const showAddress = props.showAddress;
     const showViewLink = props.showViewLink;
@@ -63,7 +65,7 @@ const EventCard = props => {
     return (
         <Fragment>
             {event.name &&
-                <Card>
+                <Card style={{minWidth: "20rem"}}>
                     {showAlert
                         ? <DeleteAlert />
                         : <Fragment>
@@ -78,10 +80,12 @@ const EventCard = props => {
                                     Location: {event.addressInfo}<br />
                                     
                                     Start: {moment(event.start).format('MMMM Do YYYY, h:mm:ss a')}<br />
-                                    End: {moment(event.end).format('MMMM Do YYYY, h:mm:ss a')}
+                                    "End:" {moment(event.end).format('MMMM Do YYYY, h:mm:ss a')}
                                 </Card.Text>
                                 <Card.Subtitle className="mb-2 text-muted">
                                     People Going: { event.groupSize === "Any" ? ("Free for all to join."):( <Fragment>{event.attendingId.length} / {event.groupSize}</Fragment>)}
+                                    <br/>
+                                    {setUsers && setUsers.map(user => <Fragment><br/><Link to="#">{user.displayname}</Link></Fragment>  )}
                                 </Card.Subtitle>
                             </Card.Body>
                             <Card.Footer style={{ background: "#343a40" }}>

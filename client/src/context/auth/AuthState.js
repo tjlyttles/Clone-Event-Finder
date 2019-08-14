@@ -1,5 +1,6 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import axios from "axios";
+import Toast from 'react-bootstrap/Toast'
 import AuthContext from "./authContext";
 import authReducer from "./authReducer";
 import setAuthToken from "../../utils/setAuthToken";
@@ -67,6 +68,7 @@ const AuthState = props => {
         type: REGISTER_FAIL,
         payload: err.response.data.msg
       });
+      alert("User already exists.")
     }
   };
 
@@ -92,6 +94,7 @@ const AuthState = props => {
         type: LOGIN_FAIL,
         payload: err.response.data.msg
       });
+      alert("Invalid Username or Password")
     }
   };
 
@@ -151,6 +154,8 @@ const AuthState = props => {
       {props.children}
     </AuthContext.Provider>
   );
+
+  
 };
 
 export default AuthState;

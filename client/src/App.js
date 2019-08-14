@@ -13,6 +13,7 @@ import EditEvent from "./pages/EditEvent"
 import CreateEvent from "./pages/CreateEvent";
 import SearchEvent from "./pages/SearchEvent";
 import ViewEvent from "./pages/ViewEvent";
+
 // import UserReview from "./pages/UserReview";
 
 if (localStorage.token) {

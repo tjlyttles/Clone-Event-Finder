@@ -61,11 +61,11 @@ const ViewEvent = props => {
     }
 
     // eslint-disable-next-line
-  }, [current, user]);
+  }, [current]);
 
   useEffect(() => {
     getCurrent(urlId);
-
+    getUsersProfile(urlId)
     // eslint-disable-next-line
   }, []);
 
@@ -103,7 +103,7 @@ const ViewEvent = props => {
 
   if (showAlert) {
     return (
-      <Card style={{ width: "25rem" }}>
+      <Card>
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
           <Alert.Heading>
             Are you sure you want to delete this event?
@@ -121,7 +121,9 @@ const ViewEvent = props => {
       {mapLat === null && mapLng === null ? (
         <h1>This event is not available.</h1>
       ) : (
-        <CardGroup>
+        <div style={{ width: '100%' }}>
+        <Card >
+         
           <EventCard
             key={event._id}
             event={event}
@@ -129,11 +131,12 @@ const ViewEvent = props => {
             showAddress={showAddress}
             showViewLink={showViewLink}
             setShowToast={setShowToast}
+            setUsers={setUsers}
           />
-          <Card style={{ padding: 10 }}>
-            <Map lat={mapLat} lng={mapLng} />
-          </Card>
-        </CardGroup>
+         {/* <Map lat={mapLat} lng={mapLng} addressInfo={event.addressInfo} /> */}
+            
+         
+        </Card></div>
       )}{" "}
     </Fragment>
   );

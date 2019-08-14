@@ -89,32 +89,6 @@ const CreateEvent = props => {
     }
   }, [getCurrent, urlId]);
 
-  // useEffect(() => {
-  //   setTimeMessage(null);
-  //   if (endTime <= startTime) {
-  //     setTimeMessage("The end time should be later than the start time");
-  //   }
-  // }, [startTime, endTime]);
-
-  // const handleStartTime = time => {
-  //   setStartTime(time);
-
-  //   const saveState = event;
-  //   saveState.start = time;
-  //   setEvent(saveState);
-  //   //setEvent({...event, [start]: date})
-  // };
-
-  // const handleEndTime = time => {
-  //   setEndTime(time);
-  //   console.log("Hello,why you don't work");
-
-  //   const saveState = event;
-  //   saveState.end = time;
-  //   setEvent(saveState);
-  //   //setEvent({...event, [start]: date})
-  // };
-
   const {
     name,
     location,

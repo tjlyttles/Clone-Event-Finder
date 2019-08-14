@@ -190,7 +190,7 @@ const EventState = props => {
   //View User Profile
   const getUsersProfile = async event => {
     try {
-      const res = await axios.get(`/api/events/profiles/${event._id}`, event);
+      const res = await axios.get(`/api/events/profiles/${event}`, event);
 
       dispatch({
         type: GET_USERS,

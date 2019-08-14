@@ -85,11 +85,11 @@ return (
         </Form>
       </Card.Body>
     </Card> 
-    <Card style={{padding: 30}}>
+    <Card style={{padding: 25}}>
       <Card.Body>
         <Card.Title>Results</Card.Title>
       
-        <Row style={{display: "flex", justifyContent: "space-between"}}>
+        <CardDeck>
           {upcomingEvents === null ? (
             <div>No Events Available</div>
           ) : filtered !== null ? (
@@ -101,7 +101,7 @@ return (
               <EventCard key={event._id} event={event} user={user} showAddress={showAddress} showViewLink={showViewLink} setShowToast={setShowToast} />
          ))
           )}
- </Row>
+ </CardDeck>
       </Card.Body>
     </Card>  
   </Fragment>

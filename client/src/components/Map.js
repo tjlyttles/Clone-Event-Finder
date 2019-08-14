@@ -16,7 +16,7 @@ const MapContainer = props => {
   //       selectedPlace: {} //Shows the infoWindow to the selected place upon a marker
   //     };
   //   }
-  console.log(props)
+  console.log(props);
 
   const [state, setState] = useState({
     showingInfoWindow: false, //Hides or the shows the infoWindow
@@ -39,35 +39,37 @@ const MapContainer = props => {
       });
     }
   };
-  if(!props.loaded) {
-      return "Map unavailable at this time."
+  if (!props.loaded) {
+    return "Map unavailable at this time.";
   }
 
   console.log("Map log", props.lat, props.lng);
   return (
-    <Map
-      google={props.google}
-      zoom={12}
-      style={mapStyles}
-      initialCenter={{ lat: 32.712043, lng: -117.142254 }}
-      center={{ lat: props.lat, lng: props.lng }}
-      //onClick={onMapClicked}
-    >
-      <Marker
-        onClick={onMarkerClick}
-        position={{ lat: props.lat, lng: props.lng }}
-        name={"Current Location"}
-      />
-      <InfoWindow
-        marker={state.activeMarker}
-        visible={state.showingInfoWindow}
-        onClose={onClose}
+    
+      <Map
+        google={props.google}
+        zoom={12}
+        style={mapStyles}
+        initialCenter={{ lat: 32.712043, lng: -117.142254 }}
+        center={{ lat: props.lat, lng: props.lng }}
+        //onClick={onMapClicked}
       >
-        <div>
-          <h4>{state.selectedPlace.name}</h4>
-        </div>
-      </InfoWindow>
-    </Map>
+        <Marker
+          onClick={onMarkerClick}
+          position={{ lat: props.lat, lng: props.lng }}
+          name={props.addressInfo}
+        />
+        <InfoWindow
+          marker={state.activeMarker}
+          visible={state.showingInfoWindow}
+          onClose={onClose}
+        >
+          <div>
+            <h4>{state.selectedPlace.name}</h4>
+          </div>
+        </InfoWindow>
+      </Map>
+   
   );
 };
 
