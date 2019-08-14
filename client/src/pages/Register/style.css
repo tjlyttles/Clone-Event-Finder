@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster|Roboto&display=swap');
+
+.modal-content {
+    border-radius: 10%;
+    padding: 2rem 2rem
+}
+
+.modal-title {
+    font-family: 'Lobster',cursive;
+    font-size: 2rem;
+    line-height: 1;
+    
+}
+
+.modal-header {
+    border: 0px
+}
+
+.modal-body {
+    padding-top: 0px
+}
+
+#buttonRow {
+    margin-top: 20px
+}
+.form-label {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background-color: #ffffff;
+    border-color: #007bff;
+    color:#007bff;
+}
+
+.btn-primary:hover {
+    background-color: #007bff;
+    border-color: #388bff;
+    color:#ffffff
+}
+
+.btn-danger {
+    background-color: #ffffff;
+    border-color: #ef1047;
+    color:#ef1047;
+}
+
+.btn-danger:hover {
+    background-color: #ef1047;
+    border-color: #ff3155;
+    color:#ffffff;
+}
