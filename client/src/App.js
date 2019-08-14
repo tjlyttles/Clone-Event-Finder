@@ -6,7 +6,7 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import Loading from "./components/Loading";
 import setAuthToken from "./utils/setAuthToken";
 import history from "./utils/history";
-import Navigation from "./components/Navigation"
+import Navigation from "./components/Navigation/index"
 import Home from "./pages/Home";
 import User from "./pages/User";
 import EditEvent from "./pages/EditEvent"

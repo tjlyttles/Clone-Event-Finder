@@ -1,14 +1,14 @@
 import React, { Fragment, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../context/auth/authContext";
-import EventContext from "../context/event/eventContext";
-import history from "../utils/history"
+import AuthContext from "../../context/auth/authContext";
+import EventContext from "../../context/event/eventContext";
+import history from "../../utils/history"
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Modal from "react-bootstrap/Modal";
-import Register from "../pages/Register"
-import SignIn from "../pages/SignIn"
-
+import Register from "../../pages/Register"
+import SignIn from "../../pages/SignIn"
+import "./style.css"
 
 
 const Navigation = () => {
@@ -44,7 +44,7 @@ const Navigation = () => {
         <Fragment>
             <Navbar sticky="top" bg="dark" variant="dark" expand="md">
                 <Navbar.Brand>
-                    <Link to="/" className="nav-link">Lonely Friend Finder</Link>
+                    <Link to="/" className="nav-link nav-brand">Lonely Friend Finder</Link>
                 </Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
