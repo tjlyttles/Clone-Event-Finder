@@ -8,7 +8,7 @@ const DeleteButton = props => {
     return (
         <Fragment>
             <Link className="card-link" to={`/edit/${props.event._id}`}>Edit</Link>
-            <Button className="btn-danger" onClick={() => props.setShowAlert(true)} size="sm" style={{ float: "right" }}>Delete</Button>
+            <Button variant="outline-danger" onClick={() => props.setShowAlert(true)} size="sm" style={{ float: "right" }}>Delete</Button>
         </Fragment>
     );
 }

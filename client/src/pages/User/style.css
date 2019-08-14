@@ -1,0 +1,11 @@
+@media (min-width: 768px) {
+    #left-border {
+    border-left: 1px solid #c0c0c0
+    }
+}
+
+
+#user-field,
+#user-event-field {
+    border: none
+}

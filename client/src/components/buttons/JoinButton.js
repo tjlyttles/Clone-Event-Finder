@@ -34,7 +34,7 @@ const JoinButton = props => {
   return (
     <Button
       type="submit"
-      className="btn-success"
+      variant="outline-success"
       onClick={() => handleJoin(event, props.setShowToast)}
       size="sm"
       style={{ float: "right" }}

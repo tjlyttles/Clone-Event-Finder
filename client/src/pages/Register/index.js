@@ -91,8 +91,8 @@ const Register = props => {
                 />
             </Form.Group>
             <Row className="justify-content-center" id="buttonRow">
-                <Button type="submit" variant="primary" style={{ margin: "0 5px" }} >Register</Button>
-                <Button onClick={props.onHide} variant="danger" style={{ margin: "0 5px" }}>Cancel</Button>
+                <Button type="submit" variant="outline-primary" style={{ margin: "0 5px" }} >Register</Button>
+                <Button onClick={props.onHide} variant="outline-danger" style={{ margin: "0 5px" }}>Cancel</Button>
             </Row>
         </Form>
     );

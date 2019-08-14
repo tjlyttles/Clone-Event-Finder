@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
-import AuthContext from "../context/auth/authContext";
-import EventContext from "../context/event/eventContext";
-import Loading from "../components/Loading";
-import UserEvents from "../components/events/UserEvents";
+import AuthContext from "../../context/auth/authContext";
+import EventContext from "../../context/event/eventContext";
+import Loading from "../../components/Loading";
+import UserEvents from "../../components/events/UserEvents";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "./style.css"
 
 const User = props => {
     const [showProfile, setShowProfile] = useState(false);
@@ -90,8 +91,8 @@ const User = props => {
     return (
         <Fragment>
             <Row>
-                <Col md={6}>
-                    <Card>
+                <Col sm={12} md={3}>
+                    <Card id="user-field">
                         {user && user.image && <Card.Img variant="top" src={user && user.image} />}
                         <Card.Body>
                             <Card.Title>Welcome, {user && user.displayname}!</Card.Title>
@@ -111,17 +112,17 @@ const User = props => {
                         </Card.Footer>
                     </Card>
                 </Col>
-                <Col md={6}>
-          <Card>
-            <Card.Body>
-              {!userEvents ? (
-                <Card.Text>No events available.</Card.Text>
-              ) : (
-                <UserEvents key={userEvents._id} upcomingEvents={upcomingEvents} pastEvents={pastEvents} user={user} />
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
+                <Col sm={12} md={9} id="left-border">
+                    <Card id="user-event-field">
+                        <Card.Body>
+                            {!userEvents ? (
+                                <Card.Text>No events available.</Card.Text>
+                            ) : (
+                                <UserEvents key={userEvents._id} upcomingEvents={upcomingEvents} pastEvents={pastEvents} user={user} />
+                            )}
+                        </Card.Body>
+                    </Card>
+                </Col>
             </Row>
 
             {showProfile && (
@@ -185,13 +186,13 @@ const User = props => {
                                 />
                             </Form.Group>
                             <Row className="justify-content-center">
-                                <Button variant="primary" type="submit" style={{ margin: "0 5px" }}>
+                                <Button variant="outline-primary" type="submit" style={{ margin: "0 5px" }}>
                                     Submit
                   </Button>
                                 <Button
                                     onClick={() => setShowProfile(false)}
                                     style={{ margin: "0 5px" }}
-                                    variant = "danger"
+                                    variant = "outline-danger"
                                 >
                                     Cancel
                   </Button>
@@ -223,12 +224,12 @@ const User = props => {
                                     type="password"
                                     placeholder="Verify Password"
                                     onChange={e => setPasswordMatch(e.target.value)}
-                                    variant = "primary"
+                                    variant = "outline-primary"
                                 />
                             </Form.Group>
                             <Row className="justify-content-center">
                                 <Button type="submit" style={{ margin: "0 5px" }}>Submit</Button>
-                                <Button onClick={() => setShowPassword(false)} style={{ margin: "0 5px" }} variant="danger">Cancel</Button>
+                                <Button onClick={() => setShowPassword(false)} style={{ margin: "0 5px" }} variant="outline-danger">Cancel</Button>
                             </Row>
                         </Form>
                     </Modal.Body>

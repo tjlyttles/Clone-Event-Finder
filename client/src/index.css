@@ -33,18 +33,17 @@ code {
   padding: 15px 0 20px 0;
 }
 
-.card {
-  margin-top: 10px;
-  border-color: #363636;
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select.form-control {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #000000;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
 }
-
-.card-footer {
-  background-color: #363636;
-  text-align: right;
-  color: #ffffff;
-}
-
-
 
 a {
   color: #006ced;

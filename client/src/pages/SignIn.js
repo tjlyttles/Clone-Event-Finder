@@ -56,8 +56,8 @@ const SignIn = props => {
                 />
             </Form.Group>
             <Row className="justify-content-center">
-                <Button type="submit" variant="primary" style={{ margin: "0 5px" }}>Sign In</Button>
-                <Button onClick={props.onHide} variant="danger" style={{ margin: "0 5px" }}>Cancel</Button>
+                <Button type="submit" variant="outline-primary" style={{ margin: "0 5px" }}>Sign In</Button>
+                <Button onClick={props.onHide} variant="outline-danger" style={{ margin: "0 5px" }}>Cancel</Button>
             </Row>
         </Form>
     );

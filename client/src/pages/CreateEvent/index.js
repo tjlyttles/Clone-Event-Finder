@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import FormControl from "react-bootstrap/FormControl";
 import Card from "react-bootstrap/Card";
 import Grid from "@material-ui/core/Grid";
-import history from "../utils/history";
+import history from "../../utils/history";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
@@ -16,11 +16,12 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import AuthContext from "../context/auth/authContext";
+import AuthContext from "../../context/auth/authContext";
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 //import MapCont from "../components/Map";
-import EventContext from "../context/event/eventContext";
+import EventContext from "../../context/event/eventContext";
 import Geocode from "react-geocode";
+import "./style.css"
 
 Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API_KEY);
 
@@ -202,8 +203,8 @@ useEffect (() => {
       <br />
       <Row>
         <Col>
-          <Card>
-            <Card.Title style={{ textAlign: "center" }}>
+          <Card id="create-event">
+            <Card.Title id="create-event-tittle" style={{ textAlign: "center" }}>
               {current ? "Edit Event" : "Create Event"}
             </Card.Title>
             <Card.Body>

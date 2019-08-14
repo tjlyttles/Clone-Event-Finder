@@ -1,0 +1,23 @@
+
+@import url('https://fonts.googleapis.com/css?family=Lobster|Roboto&display=swap');
+
+#create-event.card {
+    border: 0px;
+}
+
+#create-event-tittle {
+    font-family: "Lobster", cursive;
+    font-size: 3rem;
+    color:#006ced;
+}
+
+.input-group-text {
+  border:none;
+  background-color:#ffffff;
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #000000;
+  padding: 0px;
+  padding-right: 16px;
+  width: 100%;
+}
