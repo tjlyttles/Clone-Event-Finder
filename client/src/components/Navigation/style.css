@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css?family=Lobster|Roboto&display=swap');
+
+.nav-link.nav-brand {
+    font-family: "Lobster", cursive;
+    color: #006ced;
+    padding: 0
+}
+
+a.nav-link.nav-brand:hover {
+    color: #388bff
+}
+
+.nav-link {
+    font-family: "Robotto",sans-serif
+}
+
+
+
+@media (max-width: 767px) {
+    .nav-link {
+        text-align: center
+    }
+}

@@ -35,18 +35,29 @@ code {
 
 .card {
   margin-top: 10px;
+  border-color: #363636;
 }
 
-/* .btn {
-  margin: "0 5px";
-} */
+.card-footer {
+  background-color: #363636;
+  text-align: right;
+  color: #ffffff;
+}
+
+
+
+a {
+  color: #006ced;
+}
+
+a:hover {
+  color: #388bff;
+  text-decoration: none
+}
 
 .footer {
   flex-shrink: 0;
   text-align: center;
-  /* background-color: tomato; */
-  /* color: white; */
-  /* border-top: #404040 solid 2px; */
 }
 
 /* media queries */

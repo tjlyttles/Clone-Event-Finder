@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Row, Form, Button } from "react-bootstrap";
-import AuthContext from "../context/auth/authContext";
-import history from "../utils/history";
+import AuthContext from "../../context/auth/authContext";
+import history from "../../utils/history";
+import "./style.css"
 
 const Register = props => {
     const authContext = useContext(AuthContext);
@@ -89,9 +90,9 @@ const Register = props => {
                     onChange={handleChange}
                 />
             </Form.Group>
-            <Row className="justify-content-center">
-                <Button type="submit" variant="primary" style={{ margin: "0 5px" }}>Register</Button>
-                <Button onClick={props.onHide} varient="danger" style={{ margin: "0 5px" }}>Cancel</Button>
+            <Row className="justify-content-center" id="buttonRow">
+                <Button type="submit" variant="primary" style={{ margin: "0 5px" }} >Register</Button>
+                <Button onClick={props.onHide} variant="danger" style={{ margin: "0 5px" }}>Cancel</Button>
             </Row>
         </Form>
     );
