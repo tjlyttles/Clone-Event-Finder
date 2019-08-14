@@ -63,14 +63,18 @@ const CreateEvent = props => {
     description: "",
     attendId: "",
     addressInfo: "",
-    start: null,
-    end: null,
+    start: "",
+    end: "",
     mapLat: null,
     mapLng: null
   });
+  //setEvent({...event, start: current.start.toString()})
+
+  console.log((event.start).toString())
   useEffect(() => {
     if (!user) {
-      authContext.loadUser();
+      authContext.loadUser().then(()=> window.location.reload);
+
       // console.log("missing user")
     }
   });
@@ -84,10 +88,12 @@ const CreateEvent = props => {
  
   useEffect(() => {
     if (current) {
+      current.start = current.start.toLocaleString()
+      current.end = current.end.toLocaleString()
       setEvent(current);
      
     } 
-  }, [eventContext]);
+  }, [eventContext, current]);
 
 
   const {

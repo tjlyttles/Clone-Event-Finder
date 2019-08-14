@@ -88,6 +88,7 @@ const ViewEvent = props => {
     mapLat: null,
     mapLng: null
   });
+  
 
   const { mapLat, mapLng } = event;
   console.log(mapLat);
@@ -97,7 +98,7 @@ const ViewEvent = props => {
     deleteEvent(current._id);
     history.push("/user");
   };
-  if (!user) {
+  if (!current) {
     return <Loading />;
   }
 
@@ -118,7 +119,7 @@ const ViewEvent = props => {
 
   return (
     <Fragment>
-      {mapLat === null && mapLng === null ? (
+      {!current ? (
         <h1>This event is not available.</h1>
       ) : (
         <div style={{ width: '100%' }}>

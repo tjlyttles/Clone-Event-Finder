@@ -70,7 +70,8 @@ const EventCard = props => {
                         ? <DeleteAlert />
                         : <Fragment>
                             <Card.Header style={{ background: "#343a40", color: "white" }}>
-                                <Card.Title><Link to={`/view/${event._id}`} className="card-link"> {event.name.toUpperCase()}</Link></Card.Title>
+                                {setUsers ? (<Card.Title style={{color: "orange"}} > {event.name.toUpperCase()}</Card.Title>) :
+                                (<Card.Title><Link to={`/view/${event._id}`} className="card-link"> {event.name.toUpperCase()}</Link></Card.Title>)}
                                 <Card.Subtitle className="mb-2 text-muted">
                                     {event.category}
                                 </Card.Subtitle>
