@@ -53,10 +53,10 @@ const EventSchema = new Schema({
     type: String
   },
   mapLat: {
-    type: Number
+    type: String
   },
   mapLng: {
-    type: Number
+    type: String
   }
 });
 

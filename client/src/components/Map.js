@@ -47,14 +47,18 @@ const MapContainer = props => {
   return (
     
       <Map
-        google={props.google}
+        //google={props.google}
         zoom={12}
-        style={mapStyles}
+        //style={mapStyles}
         initialCenter={{ lat: 32.712043, lng: -117.142254 }}
         center={{ lat: props.lat, lng: props.lng }}
         //onClick={onMapClicked}
       >
-        <Marker
+       <div>
+            {/* <h4>{state.selectedPlace.name}</h4> */}
+            <img alt="Map unavailable" src={`https://maps.googleapis.com/maps/api/staticmap?center=${props.lat},${props.lng}&zoom=14&size=100x100&key=${GoogleApiWrapper}`} />
+          </div>
+        {/* <Marker
           onClick={onMarkerClick}
           position={{ lat: props.lat, lng: props.lng }}
           name={props.addressInfo}
@@ -64,10 +68,8 @@ const MapContainer = props => {
           visible={state.showingInfoWindow}
           onClose={onClose}
         >
-          <div>
-            <h4>{state.selectedPlace.name}</h4>
-          </div>
-        </InfoWindow>
+          
+        </InfoWindow> */}
       </Map>
    
   );

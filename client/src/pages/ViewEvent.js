@@ -65,7 +65,7 @@ const ViewEvent = props => {
 
   useEffect(() => {
     getCurrent(urlId);
-    getUsersProfile(urlId)
+    getUsersProfile(urlId);
     // eslint-disable-next-line
   }, []);
 
@@ -88,7 +88,6 @@ const ViewEvent = props => {
     mapLat: null,
     mapLng: null
   });
-  
 
   const { mapLat, mapLng } = event;
   console.log(mapLat);
@@ -122,25 +121,27 @@ const ViewEvent = props => {
       {!current ? (
         <h1>This event is not available.</h1>
       ) : (
-        <div style={{ width: '100%' }}>
-        <Card >
-         
-          <EventCard
-            key={event._id}
-            event={event}
-            user={user}
-            showAddress={showAddress}
-            showViewLink={showViewLink}
-            setShowToast={setShowToast}
-            setUsers={setUsers}
-          />
-         {/* <Map lat={mapLat} lng={mapLng} addressInfo={event.addressInfo} /> */}
-            
-         
-        </Card></div>
+        <div style={{ width: "100%" }}>
+          <Card>
+            <EventCard
+              key={event._id}
+              event={event}
+              user={user}
+              showAddress={showAddress}
+              showViewLink={showViewLink}
+              setShowToast={setShowToast}
+              setUsers={setUsers}
+              mapLat = {mapLat}
+              mapLng = {mapLng}
+            />
+           
+          </Card>
+        </div>
       )}{" "}
     </Fragment>
   );
 };
 
 export default ViewEvent;
+
+// `https://maps.googleapis.com/maps/api/staticmap?center=${latLng}&zoom=14&size=100x100&key=AIzaSyDy8pqEx_u7wJ7MdWaUQkQ4HqQSWEy8RgI`
