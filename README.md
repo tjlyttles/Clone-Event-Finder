@@ -1,2 +1,2 @@
 # 21-Project-3
- Full MERN website using Google's book search API. Search for your favorite books and save them to a list that you want to read for later.
+A full MERN website where you can create an account to create, share and join events from other users in order to share in similar interests and experiences.
