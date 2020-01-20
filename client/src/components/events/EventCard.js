@@ -1,6 +1,7 @@
 import React, { useState, Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import Card from "react-bootstrap/Card";
+import Modal from "react-bootstrap/Modal"
 import Alert from "react-bootstrap/Alert";
 import Button from "react-bootstrap/Button";
 import DeleteButton from "../buttons/DeleteButton";
@@ -16,6 +17,10 @@ const EventCard = props => {
   const event = props.event;
   const setUsers = props.setUsers;
   console.log(setUsers);
+  const [show, setShowProfile] = useState(false);
+
+  const handleCloseProfile = () => setShowProfile(false);
+  const handleShowProfile = () => setShowProfile(true);
 
   const showAddress = props.showAddress;
   const showViewLink = props.showViewLink;
@@ -30,10 +35,6 @@ const EventCard = props => {
     console.log("eventId", eventId);
     setShowAlert(false);
     deleteEvent(eventId).then(() => window.location.reload());
-    // deleteEvent(current._id);
-    // clearCurrent();
-    // clearUsers();
-    // history.push("/user");
   };
 
   // <DeleteButton setCurrent={setCurrent} setShowAlert={setShowAlert} />
@@ -81,6 +82,24 @@ const EventCard = props => {
   } else if (showViewLink === "hide") {
     viewLink = <Fragment />;
   }
+if(show) {
+  return (
+    <>
+      <Modal show={show} onHide={handleCloseProfile}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseProfile}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
+}
+
 
   return (
     <Fragment>
@@ -134,10 +153,10 @@ const EventCard = props => {
                   )}
                   <br />
                   {setUsers &&
-                    setUsers.map(user => (
+                    setUsers.map((user ,i) => (
                       <Fragment>
                         <br />
-                        <Link to="#">{user.displayname}</Link>
+                        <Link to="#" onClick={setShowProfile(true)}>{user.displayname}</Link>
                       </Fragment>
                     ))}
                 </Card.Subtitle>
