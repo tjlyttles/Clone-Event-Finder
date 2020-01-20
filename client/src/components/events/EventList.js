@@ -18,7 +18,7 @@ const EventList = () => {
     let pastEvents;
 
     useEffect(() => {
-        getUserEvents();
+        getUserEvents(user._id);
         // eslint-disable-next-line
     }, []);
 

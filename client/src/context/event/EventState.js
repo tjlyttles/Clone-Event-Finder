@@ -55,9 +55,9 @@ const EventState = props => {
   };
 
   //Get User Events
-  const getUserEvents = async () => {
+  const getUserEvents = async userId => {
     try {
-      const res = await axios.get("/api/events/user");
+      const res = await axios.get(`/api/events/user/${userId}`);
 
       dispatch({
         type: GET_USER_EVENTS,

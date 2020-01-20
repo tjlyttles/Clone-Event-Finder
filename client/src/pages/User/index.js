@@ -36,7 +36,8 @@ const User = props => {
     });
 
     useEffect(() => {
-        getUserEvents();
+        if(user) {getUserEvents(user._id);}
+        
         // eslint-disable-next-line
     }, []);
 

@@ -8,10 +8,16 @@ import DeleteButton from "../buttons/DeleteButton";
 import JoinButton from "../buttons/JoinButton";
 import LeaveButton from "../buttons/LeaveButton";
 import EventContext from "../../context/event/eventContext";
+<<<<<<< Updated upstream
+=======
+import Modal from "react-bootstrap/Modal"
+import ViewGuest from "../modals/ViewGuest"
+>>>>>>> Stashed changes
 import moment from "moment";
 
 //import EventAPI from "../../utils/EventAPI";
 // child of searchevent, userevent
+<<<<<<< Updated upstream
 const EventCard = props => {
   const user = props.user;
   const event = props.event;
@@ -29,12 +35,37 @@ const EventCard = props => {
   const eventContext = useContext(EventContext);
   const { deleteEvent } = eventContext;
 
+=======
+
+
+
+const EventCard = props => {
+  const user = props.user;
+  const event = props.event;
+  const setUsers = props.setUsers;
+  console.log(setUsers);
+
+  const showAddress = props.showAddress;
+  const showViewLink = props.showViewLink;
+  let eventAddress;
+  let viewLink;
+  const eventContext = useContext(EventContext);
+  const { deleteEvent } = eventContext;
+  const [showProfile, setShowProfile] = useState(false);
+>>>>>>> Stashed changes
   const [showAlert, setShowAlert] = useState(false);
 
   const handleDelete = eventId => {
     console.log("eventId", eventId);
     setShowAlert(false);
     deleteEvent(eventId).then(() => window.location.reload());
+<<<<<<< Updated upstream
+=======
+    // deleteEvent(current._id);
+    // clearCurrent();
+    // clearUsers();
+    // history.push("/user");
+>>>>>>> Stashed changes
   };
 
   // <DeleteButton setCurrent={setCurrent} setShowAlert={setShowAlert} />
@@ -73,6 +104,7 @@ const EventCard = props => {
     eventAddress = <Fragment />;
   }
 
+<<<<<<< Updated upstream
   if (showViewLink === "show") {
     viewLink = (
       <Link to={`/view/${event._id}`} className="card-link">
@@ -100,6 +132,8 @@ if(show) {
   );
 }
 
+=======
+>>>>>>> Stashed changes
 
   return (
     <Fragment>
@@ -110,6 +144,7 @@ if(show) {
           ) : (
             <Fragment>
               <Card.Header style={{ background: "#343a40", color: "white" }}>
+<<<<<<< Updated upstream
                 {setUsers ? (
                   <Card.Title style={{ color: "orange" }}>
                     {" "}
@@ -117,17 +152,29 @@ if(show) {
                   </Card.Title>
                 ) : (
                   <Card.Title>
+=======
+                <Card.Title>
+                  {setUsers ? (
+                    <Fragment>{event.name.toUpperCase()}</Fragment>
+                  ) : (
+>>>>>>> Stashed changes
                     <Link to={`/view/${event._id}`} className="card-link">
                       {" "}
                       {event.name.toUpperCase()}
                     </Link>
+<<<<<<< Updated upstream
                   </Card.Title>
                 )}
+=======
+                  )}
+                </Card.Title>
+>>>>>>> Stashed changes
                 <Card.Subtitle className="mb-2 text-muted">
                   {event.category}
                 </Card.Subtitle>
               </Card.Header>
               <Card.Body>
+<<<<<<< Updated upstream
                 {setUsers && (
                   <Card.Text>
                     Descriptions: {event.description}
@@ -141,6 +188,14 @@ if(show) {
                   Start: {moment(event.start).format("MMMM Do YYYY, h:mm:ss a")}
                   <br />
                   End: {moment(event.end).format("MMMM Do YYYY, h:mm:ss a")}
+=======
+                <Card.Text style={{ textTransform: "capitalize" }}>
+                  Location: {event.addressInfo}
+                  <br />
+                  Start: {moment(event.start).format("MMMM Do YYYY, h:mm:ss a")}
+                  <br />
+                  "End:" {moment(event.end).format("MMMM Do YYYY, h:mm:ss a")}
+>>>>>>> Stashed changes
                 </Card.Text>
                 <Card.Subtitle className="mb-2 text-muted">
                   People Going:{" "}
@@ -153,6 +208,7 @@ if(show) {
                   )}
                   <br />
                   {setUsers &&
+<<<<<<< Updated upstream
                     setUsers.map((user ,i) => (
                       <Fragment>
                         <br />
@@ -175,6 +231,16 @@ if(show) {
                 )}
               </Card.Body>
 
+=======
+                    setUsers.map(user => (
+                      <Fragment>
+                        <br />
+                        <Link to="#" onClick={() => setShowProfile(showProfile ? false : true)}>{user.displayname}{showProfile &&(<ViewGuest onHide={() => setShowProfile(false)} user={user} showProfile={showProfile} setShowProfile={setShowProfile} />)}</Link>
+                      </Fragment>
+                    ))}
+                </Card.Subtitle>
+              </Card.Body>
+>>>>>>> Stashed changes
               <Card.Footer style={{ background: "#343a40" }}>
                 {user._id === event.user && (
                   <Fragment>
@@ -203,8 +269,16 @@ if(show) {
           )}
         </Card>
       )}
+<<<<<<< Updated upstream
     </Fragment>
   );
+=======
+        
+      
+    </Fragment>
+  );
+  
+>>>>>>> Stashed changes
 };
 
 export default EventCard;

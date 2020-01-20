@@ -3,7 +3,7 @@ import ViewUser from "./ViewUser";
 import EventContext from "../../context/event/eventContext";
 import AuthContext from "../../context/auth/authContext";
 
-const UserList = () => {
+const UserList = props => {
    
               const eventContext = useContext(EventContext);
   const authContext = useContext(AuthContext);

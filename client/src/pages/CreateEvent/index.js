@@ -359,7 +359,7 @@ const CreateEvent = props => {
                       />
                       <br />
                       <br />
-                      <h6>*When the event will end:</h6>
+                      <h6>*End Date and Time:</h6>
                       <DateTimePicker
                         //requred="true"
                         minDate={date}

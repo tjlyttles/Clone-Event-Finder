@@ -28,10 +28,10 @@ router.get("/event/:id", async (req, res) => {
   }
 });
 
-router.get("/user", auth, async (req, res) => {
+router.get("/user/:id", async (req, res) => {
   try {
     const events = await Event.find({
-      attendingId: { $all: [req.user.id] }
+      attendingId: { $all: [req.params.id] }
     }).sort({
       date: -1
     });
