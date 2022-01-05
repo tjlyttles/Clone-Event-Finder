@@ -13,8 +13,7 @@ if (process.env.NODE_ENV === "production") {
 
 //mongoose connection, need to add database name
 mongoose.connect(
-  process.env.MONGODB_URI ||
-    "mongodb://user:password1@ds343127.mlab.com:43127/heroku_r3v7v5wc",
+  process.env.MONGODB_URI || "mongodb://localhost:27017/event-finder",
 
   { useCreateIndex: true, useFindAndModify: false, useNewUrlParser: true }
 );
