@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const bcrypt = require("bcrypt");
 
 const UserSchema = new Schema(
   {
@@ -50,5 +51,15 @@ const UserSchema = new Schema(
   },
   { timestamps: true }
 );
+
+UserSchema.virtual("id").get(function () {
+  return this._id.toHexString();
+});
+
+UserSchema.set("toJSON", {
+  virtuals: true,
+});
+
+//pre save hook to
 
 module.exports = mongoose.model("user", UserSchema);
