@@ -2,10 +2,10 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Sever for Event-Finder",
-  "main": "server.js",
+  "main": "./bin/www",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node ./bin/www"
   },
   "author": "",
   "license": "ISC",

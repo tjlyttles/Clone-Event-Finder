@@ -1,8 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const config = require("config");
 const auth = require("../middleware/auth");
-const { check, validationResult } = require("express-validator");
 
 const User = require("../models/User");
 const Event = require("../models/Event");
@@ -10,7 +8,7 @@ const Event = require("../models/Event");
 router.get("/", async (req, res) => {
   try {
     const events = await Event.find().sort({
-      date: -1
+      date: -1,
     });
     res.json(events);
   } catch (err) {
@@ -31,9 +29,9 @@ router.get("/event/:id", async (req, res) => {
 router.get("/user", auth, async (req, res) => {
   try {
     const events = await Event.find({
-      attendingId: { $all: [req.user.id] }
+      attendingId: { $all: [req.user.id] },
     }).sort({
-      date: -1
+      date: -1,
     });
     res.json(events);
   } catch (err) {
@@ -45,12 +43,12 @@ router.get("/profiles/:id", async (req, res) => {
   console.log(req.params);
   try {
     const attending = await Event.findById(req.params.id).sort({
-      date: -1
+      date: -1,
     });
     const profiles = await User.find({
-      _id: { $in: attending.attendingId }
+      _id: { $in: attending.attendingId },
     }).sort({
-      date: -1
+      date: -1,
     });
 
     //return array of profiles
@@ -63,14 +61,7 @@ router.get("/profiles/:id", async (req, res) => {
 
 router.post(
   "/",
-  [
-    auth,
-    [
-      check("name", "Name is required")
-        .not()
-        .isEmpty()
-    ]
-  ],
+  [auth, [check("name", "Name is required").not().isEmpty()]],
   async (req, res) => {
     console.log(req.body);
     const errors = validationResult(req);
@@ -90,7 +81,7 @@ router.post(
       pendingId,
       addressInfo,
       mapLat,
-      mapLng
+      mapLng,
     } = req.body;
 
     try {
@@ -107,11 +98,11 @@ router.post(
         addressInfo,
         mapLat,
         mapLng,
-        user: req.user.id
+        user: req.user.id,
       });
       const event = await newEvent.save();
       const response = await User.findByIdAndUpdate(req.user.id, {
-        $push: { attendingId: event._id }
+        $push: { attendingId: event._id },
       });
       if (response.isModified) {
         res.json(event);
@@ -135,7 +126,7 @@ router.put("/:id", auth, async (req, res) => {
     description,
     attendingId,
     pendingId,
-    addressInfo
+    addressInfo,
   } = req.body;
 
   const eventFields = {};
@@ -185,7 +176,7 @@ router.put("/join/:id", auth, async (req, res) => {
       { new: true }
     );
     const response = await User.findByIdAndUpdate(req.user.id, {
-      $push: { attendId: event._id }
+      $push: { attendId: event._id },
     });
     if (response.isModified) {
       res.json(event);
@@ -210,7 +201,7 @@ router.put("/leave/:id", auth, async (req, res) => {
       { new: true }
     );
     const response = await User.findByIdAndUpdate(req.user.id, {
-      $pull: { attendId: event._id }
+      $pull: { attendId: event._id },
     });
     if (response.isModified) {
       res.json(event);
