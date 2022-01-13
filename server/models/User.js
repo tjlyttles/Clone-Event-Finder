@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const bcrypt = require("bcrypt");
+const SALT_WORK_FACTOR = 10;
 
 const UserSchema = new Schema(
   {
@@ -24,10 +25,9 @@ const UserSchema = new Schema(
       required: true,
       unique: true,
     },
-    hash: {
+    password: {
       type: String,
       require: true,
-      min: 6,
     },
     image: {
       type: String,
@@ -60,6 +60,24 @@ UserSchema.set("toJSON", {
   virtuals: true,
 });
 
-//pre save hook to
+//pre save hook to salt the password
+UserSchema.pre("save", function (next) {
+  const user = this;
+  if (!user.isModified("password")) return next();
+
+  bcrypt.hash(user.password, SALT_WORK_FACTOR, function (err, hash) {
+    if (err) return next(err);
+    user.password = hash;
+  });
+});
+
+UserSchema.methods.comparePassword = async function (textPassword) {
+  try {
+    const isMatch = await bcrypt.compare(textPassword, this.password);
+    return isMatch;
+  } catch (error) {
+    throw error;
+  }
+};
 
 module.exports = mongoose.model("user", UserSchema);
