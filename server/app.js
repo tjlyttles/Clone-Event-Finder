@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const app = express();
+const auth = require("./middleware/auth");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -21,9 +22,8 @@ mongoose.connect(
 app.use(express.json({ extended: false }));
 
 //Define Routes
-app.use("/api/users", require("./routes/users"));
-app.use("/api/auth", require("./routes/auth"));
-app.use("/api/events", require("./routes/events"));
+app.use("/auth", require("./routes/auth"));
+app.use("/api", auth, require("./routes/api"));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
